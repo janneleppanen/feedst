@@ -45,13 +45,18 @@ const App = () => {
   }, []);
 
   return (
-    <div className="app">
+    <div className="max-w-screen-md mx-auto">
       {feeds.map(feed => (
         <div>
-          <h2>{feed.title}</h2>
+          <h2 className="text-2xl font-bold my-6">{feed.title}</h2>
           {feed.items.map(feedItem => (
             <div>
-              <a href={feedItem.link}>{feedItem.title}</a>
+              <a
+                className="block bg-orange-300 p-4 mb-2 hover:bg-orange-400"
+                href={feedItem.link}
+              >
+                {feedItem.title}
+              </a>
             </div>
           ))}
         </div>
