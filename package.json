@@ -10,8 +10,10 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "autoprefixer": "^9.7.4",
     "netlify-cli": "^2.31.0",
     "node-fetch": "^2.6.0",
+    "postcss-cli": "^7.1.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.1",
@@ -19,11 +21,12 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start:react": "react-scripts start",
+    "build:style": "tailwind build src/styles/index.css -o src/styles/tailwind.css",
+    "start": "netlify dev",
+    "start:react": "npm run build:style && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start": "netlify dev"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -40,5 +43,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:34567"
+  "proxy": "http://localhost:34567",
+  "devDependencies": {
+    "tailwindcss": "^1.2.0"
+  }
 }
