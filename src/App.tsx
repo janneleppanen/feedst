@@ -26,7 +26,7 @@ const App = () => {
       rssFeeds: INITIAL_FEEDS
     });
 
-    fetch("http://localhost:3000/.netlify/functions/parse-rss-feeds", {
+    fetch("/.netlify/functions/parse-rss-feeds", {
       method: "POST",
       body: data
     })
