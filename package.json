@@ -21,6 +21,7 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
+    "bootstrap": "cp .env.local.example .env.local",
     "build:style": "tailwind build src/styles/index.css -o src/styles/tailwind.css",
     "start": "netlify dev",
     "start:react": "npm run build:style && react-scripts start",

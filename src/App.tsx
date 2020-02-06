@@ -13,6 +13,8 @@ interface FeedItem {
 
 type FeedList = Feed[];
 
+const FEED_PARSE_URL = process.env.REACT_APP_FEED_PARSE_URL;
+
 const App = () => {
   const [feeds, setFeeds] = React.useState<FeedList>(
     JSON.parse(localStorage.getItem("feeds") || "") || []
@@ -30,7 +32,7 @@ const App = () => {
   };
 
   const loadFeed = async (url: string) => {
-    const res = await fetch("/.netlify/functions/parse-rss-feeds", {
+    const res = await fetch(FEED_PARSE_URL || "", {
       method: "POST",
       body: JSON.stringify({ rssFeeds: [url] })
     });
