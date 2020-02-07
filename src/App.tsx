@@ -1,17 +1,22 @@
 import React from "react";
 
-interface Feed {
+import Sidebar from "./components/Sidebar";
+
+export interface Feed {
   title: string;
+  image?: {
+    url: string;
+  };
   items: FeedItem[];
 }
 
-interface FeedItem {
+export interface FeedItem {
   title: string;
   link: string;
   content: string;
 }
 
-type FeedList = Feed[];
+export type FeedList = Feed[];
 
 const FEED_PARSE_URL = process.env.REACT_APP_FEED_PARSE_URL;
 
@@ -27,7 +32,7 @@ const App = () => {
   }, [feeds]);
 
   const handleFormSubmit = async () => {
-    const data = await loadFeed(newFeedURL);
+    await loadFeed(newFeedURL);
     setNewFeedURL("");
   };
 
@@ -42,31 +47,36 @@ const App = () => {
   };
 
   return (
-    <div className="max-w-screen-md mx-auto p-6">
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          handleFormSubmit();
-        }}
-      >
-        <input
-          className="border border-gray-300 border-solid rounded-md p-2 mr-2"
-          type="text"
-          value={newFeedURL}
-          onChange={e => setNewFeedURL(e.currentTarget.value)}
-        />
-        <button className="py-2 px-5 bg-red-500 text-white rounded-md">
-          Add new feed
-        </button>
-      </form>
+    <div className="h-screen flex">
+      <Sidebar feeds={feeds} />
+      <main className="flex-1">
+        <div className="max-w-screen-lg mx-auto my-10 p-10">
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              handleFormSubmit();
+            }}
+          >
+            <input
+              className="border border-gray-300 border-solid rounded-md p-2 mr-2"
+              type="text"
+              value={newFeedURL}
+              onChange={e => setNewFeedURL(e.currentTarget.value)}
+            />
+            <button className="py-2 px-5 bg-green-600 text-white rounded-md">
+              Add new feed
+            </button>
+          </form>
 
-      {feeds.map(feed => (
-        <div>
-          <h2 className="text-2xl font-bold my-6">
-            {feed.title} <small>({feed.items.length})</small>
-          </h2>
+          {feeds.map(feed => (
+            <div key={feed.title}>
+              <h2 className="text-2xl font-bold my-6">
+                {feed.title} <small>({feed.items.length})</small>
+              </h2>
+            </div>
+          ))}
         </div>
-      ))}
+      </main>
     </div>
   );
 };
