@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { FeedList } from "../App";
 
@@ -9,13 +10,13 @@ interface Props {
 const Sidebar = ({ feeds }: Props) => {
   return (
     <div className="bg-gray-800 w-64 p-6 text-white">
-      <a
+      <Link
         className="text-green-400 text-lg font-bold tracking-wider mb-10 block flex"
-        href="/"
+        to="/"
       >
         <div className="w-6 h-6 border-4 border-green-400 rounded-full mr-2"></div>
         RSS Reader
-      </a>
+      </Link>
 
       <h2 className="text-gray-100 uppercase tracking-wider text-sm opacity-50 mb-4">
         Feeds
@@ -23,8 +24,8 @@ const Sidebar = ({ feeds }: Props) => {
 
       {feeds.map((feed, index) => (
         <div key={feed.title} className="mb-2">
-          <a
-            href={`/feed/${index}`}
+          <Link
+            to={`/feed/${index}`}
             className="truncate block hover:text-green-400 flex items-center"
           >
             {feed.image ? (
@@ -35,7 +36,7 @@ const Sidebar = ({ feeds }: Props) => {
               </div>
             )}
             <div className="truncate block flex-1 text-sm">{feed.title}</div>
-          </a>
+          </Link>
         </div>
       ))}
     </div>
