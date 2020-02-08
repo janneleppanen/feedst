@@ -4,12 +4,10 @@ import { FeedList } from "../App";
 
 interface Props {
   feeds: FeedList;
-  setFeeds: Function;
+  addFeed: (url: string) => void;
 }
 
-const FEED_PARSE_URL = process.env.REACT_APP_FEED_PARSE_URL;
-
-const Home = ({ feeds, setFeeds }: Props) => {
+const Home = ({ addFeed }: Props) => {
   const [newFeedURL, setNewFeedURL] = React.useState<string>("");
 
   const handleFormSubmit = async () => {
@@ -18,13 +16,7 @@ const Home = ({ feeds, setFeeds }: Props) => {
   };
 
   const loadFeed = async (url: string) => {
-    const res = await fetch(FEED_PARSE_URL || "", {
-      method: "POST",
-      body: JSON.stringify({ rssFeeds: [url] })
-    });
-    const data = await res.json();
-    const newFeed = data[url];
-    setFeeds([...feeds, newFeed]);
+    addFeed(url);
   };
 
   return (
