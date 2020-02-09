@@ -30,9 +30,9 @@ const App = () => {
   const { feeds, addFeed } = useFeeds();
 
   return (
-    <div className="min-h-screen flex items-stretch">
+    <div className="flex h-screen text-sm font-sans">
       <Sidebar feeds={feeds} />
-      <main className="flex-1">
+      <main className="flex flex-1 flex-col overflow-auto h-full">
         <div className="max-w-screen-md mx-auto my-10 p-10">
           <Switch>
             <Route path="/feed/:feedId" component={Feed}></Route>
