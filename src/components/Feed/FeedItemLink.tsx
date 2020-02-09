@@ -1,25 +1,27 @@
 import React from "react";
+import { format, formatDistance } from "date-fns";
 
-import { FeedItem } from "../../App";
-
-interface Props {
-  item: FeedItem;
+export interface Props {
+  title: string;
+  link: string;
+  date: string;
+  author?: string;
 }
 
-const FeedItemLink = ({ item }: Props) => {
+const FeedItemLink = ({ title, link, date, author }: Props) => {
+  const ago = formatDistance(new Date(), new Date(date));
+  const formattedDate = format(new Date(date), "LLLL, i y");
   return (
     <a
-      key={item.title}
-      href={item.link}
+      key={title}
+      href={link}
       className="border-solid block text-lg -mx-4 p-4 hover:bg-green-200"
     >
-      <h2 className="font-bold mb-1">{item.title}</h2>
-      <p className="text-gray-500">
-        {item.pubDate
-          .split(" ")
-          .slice(0, 4)
-          .join(" ")}
+      <p className="text-gray-500 text-md">
+        {ago} ago &bull; {formattedDate}
       </p>
+      <h2 className="font-bold mb-1">{title}</h2>
+      {author && <p className="text-gray-500">{author}</p>}
     </a>
   );
 };

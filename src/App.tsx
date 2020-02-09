@@ -12,6 +12,7 @@ export interface Feed {
   image?: {
     url: string;
   };
+  link: string;
   items: FeedItem[];
 }
 
