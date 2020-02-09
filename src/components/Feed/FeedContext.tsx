@@ -24,6 +24,11 @@ export const FeedProvider: React.FC = ({ children }) => {
     return () => {};
   }, []);
 
+  React.useEffect(() => {
+    localStorage.setItem("feeds", JSON.stringify(feeds));
+    return () => {};
+  }, [feeds]);
+
   const addFeed = async (url: string) => {
     const res = await fetch(FEED_PARSE_URL || "", {
       method: "POST",
@@ -31,7 +36,11 @@ export const FeedProvider: React.FC = ({ children }) => {
     });
     const data = await res.json();
     const newFeed = data[url];
-    setFeeds([...feeds, newFeed]);
+    const isAlreadyInFeeds = feeds.map(f => f.title).includes(newFeed.title);
+
+    if (!isAlreadyInFeeds) {
+      setFeeds([...feeds, newFeed]);
+    }
   };
 
   return (

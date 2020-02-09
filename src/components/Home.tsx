@@ -10,13 +10,9 @@ interface Props {
 const Home = ({ addFeed }: Props) => {
   const [newFeedURL, setNewFeedURL] = React.useState<string>("");
 
-  const handleFormSubmit = async () => {
-    await loadFeed(newFeedURL);
+  const handleFormSubmit = () => {
+    addFeed(newFeedURL);
     setNewFeedURL("");
-  };
-
-  const loadFeed = async (url: string) => {
-    addFeed(url);
   };
 
   return (
