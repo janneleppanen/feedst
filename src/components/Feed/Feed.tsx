@@ -1,7 +1,7 @@
 import React from "react";
 
-import { useFeeds } from "../components/Feed/FeedContext";
-import FeedItemLink from "../components/Feed/FeedItemLink";
+import { useFeeds } from "./FeedContext";
+import FeedItemLink from "./FeedItemLink";
 
 interface Props {
   match: {
@@ -21,14 +21,14 @@ const Feed = (props: Props) => {
   }
 
   return (
-    <div>
+    <>
       <h1 className="text-4xl font-bold leading-tight mb-6">{feed.title}</h1>
       <p className="text-xl text-gray-700 mb-16">{feed.description}</p>
 
       {feed.items.map(item => (
         <FeedItemLink key={item.title} item={item} />
       ))}
-    </div>
+    </>
   );
 };
 

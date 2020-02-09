@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import { useFeeds } from "./components/Feed/FeedContext";
 import Sidebar from "./components/Sidebar";
 import Home from "./components/Home";
-import Feed from "./components/Feed";
+import Feed from "./components/Feed/Feed";
 
 export interface Feed {
   title: string;
