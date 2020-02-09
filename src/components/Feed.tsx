@@ -1,6 +1,7 @@
 import React from "react";
 
 import { useFeeds } from "../components/Feed/FeedContext";
+import FeedItemLink from "../components/Feed/FeedItemLink";
 
 interface Props {
   match: {
@@ -25,19 +26,7 @@ const Feed = (props: Props) => {
       <p className="text-xl text-gray-700 mb-16">{feed.description}</p>
 
       {feed.items.map(item => (
-        <a
-          key={item.title}
-          href={item.link}
-          className="border-solid block text-lg -mx-4 p-4 hover:bg-green-200"
-        >
-          <h2 className="font-bold mb-1">{item.title}</h2>
-          <p className="text-gray-500">
-            {item.pubDate
-              .split(" ")
-              .slice(0, 4)
-              .join(" ")}
-          </p>
-        </a>
+        <FeedItemLink key={item.title} item={item} />
       ))}
     </div>
   );
