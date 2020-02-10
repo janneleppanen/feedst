@@ -1,9 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
 
-import { useFeeds } from "./FeedContext";
 import FeedItemLink from "./FeedItemLink";
 
 interface Props {
+  feeds: FeedList;
   match: {
     params: {
       feedId: string;
@@ -12,7 +13,7 @@ interface Props {
 }
 
 const Feed = (props: Props) => {
-  const { feeds } = useFeeds();
+  const { feeds } = props;
   const feedId = parseInt(props.match.params.feedId);
   const feed = feeds[feedId] ? feeds[feedId] : null;
 
@@ -20,17 +21,23 @@ const Feed = (props: Props) => {
     return <p>Feed not found.</p>;
   }
 
+  if (!feed.data) {
+    return <p>Feed not found.</p>;
+  }
+
   return (
     <>
       <header className="mb-16">
-        <h1 className="text-4xl font-bold leading-tight mb-6">{feed.title}</h1>
-        <p className="text-xl text-gray-700 mb-6">{feed.description}</p>
-        <a href={feed.link} className="text-green-600 text-md">
+        <h1 className="text-4xl font-bold leading-tight mb-6">
+          {feed.data.title}
+        </h1>
+        <p className="text-xl text-gray-700 mb-6">{feed.data.description}</p>
+        <a href={feed.data.link} className="text-green-600 text-md">
           Visit website &rarr;
         </a>
       </header>
 
-      {feed.items.map(item => (
+      {feed.data.items.map(item => (
         <FeedItemLink
           key={item.title}
           title={item.title}
@@ -42,4 +49,10 @@ const Feed = (props: Props) => {
   );
 };
 
-export default Feed;
+const mapStateToProps = (state: GlobalState) => {
+  return {
+    feeds: state.feeds
+  };
+};
+
+export default connect(mapStateToProps)(Feed);

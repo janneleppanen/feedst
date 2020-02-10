@@ -1,0 +1,31 @@
+interface GlobalState {
+  test: string;
+  feeds: FeedList;
+}
+
+type FeedList = FeedState[];
+
+interface FeedState {
+  url: string;
+  data?: Feed;
+  status: "loading" | "ready";
+}
+
+interface Feed {
+  title: string;
+  description: string;
+  image?: {
+    url: string;
+  };
+  link: string;
+  items: FeedItem[];
+}
+
+interface FeedItem {
+  title: string;
+  contentSnippet: string;
+  content: string;
+  link: string;
+  pubDate: string;
+  isoDate: string;
+}
