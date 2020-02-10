@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-import { FeedList } from "../App";
+import { connect } from "react-redux";
 
 interface Props {
   feeds: FeedList;
@@ -23,19 +22,21 @@ const Sidebar = ({ feeds }: Props) => {
       </h2>
 
       {feeds.map((feed, index) => (
-        <div key={feed.title} className="mb-2">
+        <div key={feed.url} className="mb-2">
           <Link
             to={`/feed/${index}`}
             className="truncate block hover:text-green-400 flex items-center"
           >
-            {feed.image ? (
-              <img src={feed.image.url} alt="" className="w-8 h-8 mr-2" />
+            {feed.data?.image ? (
+              <img src={feed.data.image.url} alt="" className="w-8 h-8 mr-2" />
             ) : (
               <div className="bg-green-400 w-8 h-8 mr-2 text-gray-800 font-bold flex items-center justify-center">
-                <span>{feed.title[0]}</span>
+                <span>{feed.data?.title[0]}</span>
               </div>
             )}
-            <div className="truncate block flex-1 text-sm">{feed.title}</div>
+            <div className="truncate block flex-1 text-sm">
+              {feed.data?.title}
+            </div>
           </Link>
         </div>
       ))}
@@ -43,4 +44,10 @@ const Sidebar = ({ feeds }: Props) => {
   );
 };
 
-export default Sidebar;
+const mapStateToProps = (state: GlobalState) => {
+  return {
+    feeds: state.feeds
+  };
+};
+
+export default connect(mapStateToProps)(Sidebar);

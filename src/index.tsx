@@ -1,18 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import ReduxThunk from "redux-thunk";
 
-import { FeedProvider } from "./components/Feed/FeedContext";
-import App from "./App";
 import "./styles/tailwind.css";
 import * as serviceWorker from "./serviceWorker";
+import App from "./App";
+import reducers from "./redux";
+
+const store = createStore(reducers, applyMiddleware(ReduxThunk));
 
 ReactDOM.render(
-  <Router>
-    <FeedProvider>
+  <Provider store={store}>
+    <Router>
       <App />
-    </FeedProvider>
-  </Router>,
+    </Router>
+  </Provider>,
   document.getElementById("root")
 );
 

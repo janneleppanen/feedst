@@ -1,25 +1,28 @@
 import React from "react";
+import { connect } from "react-redux";
 
-import { FeedList } from "../App";
-import { useFeeds } from "./Feed/FeedContext";
 import FeedItemLink, { Props as FeedItemLinkProps } from "./Feed/FeedItemLink";
+import { loadFeed } from "../redux/FeedReducer";
 
 interface Props {
   feeds: FeedList;
-  addFeed: (url: string) => void;
+  loadFeed: (url: string) => void;
 }
 
-const Home = ({ addFeed }: Props) => {
+const Home = ({ loadFeed, feeds }: Props) => {
   const [newFeedURL, setNewFeedURL] = React.useState<string>("");
-  const { feeds } = useFeeds();
   const allFeedItems: FeedItemLinkProps[] = feeds.reduce(
     (all: FeedItemLinkProps[], feed) => {
-      const newItems = feed.items.map(i => {
+      if (!feed.data) {
+        return all;
+      }
+
+      const newItems = feed.data.items.map(i => {
         return {
           title: i.title,
           link: i.link,
           date: i.isoDate,
-          author: feed.title
+          author: feed.data?.title
         };
       });
       return [...all, ...newItems];
@@ -34,7 +37,7 @@ const Home = ({ addFeed }: Props) => {
   });
 
   const handleFormSubmit = () => {
-    addFeed(newFeedURL);
+    loadFeed(newFeedURL);
     setNewFeedURL("");
   };
 
@@ -75,4 +78,10 @@ const Home = ({ addFeed }: Props) => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state: GlobalState) => {
+  return {
+    feeds: state.feeds
+  };
+};
+
+export default connect(mapStateToProps, { loadFeed })(Home);
