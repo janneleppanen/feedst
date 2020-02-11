@@ -21,6 +21,8 @@ type UpdateAction = {
 const FeedReducer = (state: FeedList = [], action: Action) => {
   switch (action.type) {
     case CREATE_FEED:
+      const alreadyExists = state.find(f => f.url === action.url);
+      if (alreadyExists) return state;
       return [
         ...state,
         {
