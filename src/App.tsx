@@ -1,11 +1,25 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
 
+import { loadFeed } from "./redux/FeedReducer";
 import Sidebar from "./components/Sidebar";
 import Home from "./components/Home";
 import Feed from "./components/Feed/Feed";
 
-const App = () => {
+interface Props {
+  feeds: FeedState[];
+  loadFeed: (url: string) => void;
+}
+
+const App = ({ feeds, loadFeed }: Props) => {
+  React.useEffect(() => {
+    const allFeedURLs = feeds.map(feed => feed.url);
+    for (let url of allFeedURLs) {
+      loadFeed(url);
+    }
+  }, []);
+
   return (
     <div className="flex h-screen text-sm font-sans">
       <Sidebar />
@@ -21,4 +35,10 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state: GlobalState) => {
+  return {
+    feeds: state.feeds
+  };
+};
+
+export default connect(mapStateToProps, { loadFeed })(App);

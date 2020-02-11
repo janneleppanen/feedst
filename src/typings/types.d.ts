@@ -8,8 +8,10 @@ type FeedList = FeedState[];
 interface FeedState {
   url: string;
   data?: Feed;
-  status: "loading" | "ready";
+  status: FeedStatus;
 }
+
+type FeedStatus = "loading" | "ready";
 
 interface Feed {
   title: string;
