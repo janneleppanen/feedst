@@ -2,15 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import ReduxThunk from "redux-thunk";
 
 import "./styles/tailwind.css";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
-import reducers from "./redux";
-
-const store = createStore(reducers, applyMiddleware(ReduxThunk));
+import store from "./redux/store";
 
 ReactDOM.render(
   <Provider store={store}>

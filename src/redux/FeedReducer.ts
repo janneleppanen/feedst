@@ -22,7 +22,14 @@ const FeedReducer = (state: FeedList = [], action: Action) => {
   switch (action.type) {
     case CREATE_FEED:
       const alreadyExists = state.find(f => f.url === action.url);
-      if (alreadyExists) return state;
+      if (alreadyExists) {
+        return state.map(feed => {
+          return {
+            ...feed,
+            status: feed.url === action.url ? "loading" : feed.status
+          };
+        });
+      }
       return [
         ...state,
         {
@@ -55,7 +62,6 @@ export function updateFeed(url: string, data: Feed) {
 export function loadFeed(url: string) {
   return async (dispatch: Dispatch) => {
     dispatch(createFeed(url));
-
     const res = await fetch(FEED_PARSE_URL || "", {
       method: "POST",
       body: JSON.stringify({ rssFeeds: [url] })
