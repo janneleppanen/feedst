@@ -4,8 +4,9 @@ const FEED_PARSE_URL = process.env.REACT_APP_FEED_PARSE_URL;
 
 const CREATE_FEED = "feed/create";
 const UPDATE_FEED = "feed/update";
+const REMOVE_FEED = "feed/remove";
 
-type Action = CreateAction | UpdateAction;
+type Action = CreateAction | UpdateAction | RemoveAction;
 
 type CreateAction = {
   type: typeof CREATE_FEED;
@@ -16,6 +17,11 @@ type UpdateAction = {
   type: typeof UPDATE_FEED;
   url: string;
   data: Feed;
+};
+
+type RemoveAction = {
+  type: typeof REMOVE_FEED;
+  url: string;
 };
 
 const FeedReducer = (state: FeedList = [], action: Action) => {
@@ -46,6 +52,8 @@ const FeedReducer = (state: FeedList = [], action: Action) => {
         }
         return feed;
       });
+    case REMOVE_FEED:
+      return state.filter(feed => feed.url !== action.url);
     default:
       return state;
   }
@@ -57,6 +65,10 @@ export function createFeed(url: string) {
 
 export function updateFeed(url: string, data: Feed) {
   return { type: UPDATE_FEED, url, data };
+}
+
+export function removeFeed(url: string) {
+  return { type: REMOVE_FEED, url };
 }
 
 export function loadFeed(url: string) {
