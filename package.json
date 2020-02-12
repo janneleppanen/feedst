@@ -28,6 +28,7 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
+    "lint": "eslint ./src",
     "bootstrap": "cp .env.local.example .env.local",
     "build:style": "tailwind build src/styles/index.css -o src/styles/tailwind.css",
     "start": "netlify dev",
@@ -53,6 +54,17 @@
   },
   "proxy": "http://localhost:34567",
   "devDependencies": {
+    "husky": "^4.2.2",
+    "lint-staged": ">=10",
+    "prettier": "^1.19.1",
     "tailwindcss": "^1.2.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write"
   }
 }
