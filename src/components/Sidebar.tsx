@@ -35,7 +35,7 @@ const Sidebar = ({ feeds }: Props) => {
               </div>
             )}
             <div className="truncate block flex-1 text-sm">
-              {feed.data?.title}
+              {feed.status === "ready" ? feed.data?.title : "loading..."}
             </div>
           </Link>
         </div>
