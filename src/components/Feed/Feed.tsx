@@ -1,10 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
+import { removeFeed } from "../../redux/FeedReducer";
 import FeedItemLink from "./FeedItemLink";
 
 interface Props {
   feeds: FeedList;
+  removeFeed: (url: string) => void;
   match: {
     params: {
       feedId: string;
@@ -13,17 +16,27 @@ interface Props {
 }
 
 const Feed = (props: Props) => {
-  const { feeds } = props;
+  const { feeds, removeFeed } = props;
   const feedId = parseInt(props.match.params.feedId);
   const feed = feeds[feedId] ? feeds[feedId] : null;
+  const history = useHistory();
 
   if (!feed) {
     return <p>Feed not found.</p>;
   }
 
+  if (feed.status === "loading") {
+    return <p>Loading feed data...</p>;
+  }
+
   if (!feed.data) {
     return <p>Feed not found.</p>;
   }
+
+  const remove = () => {
+    removeFeed(feed.url);
+    history.push("/");
+  };
 
   return (
     <>
@@ -32,9 +45,15 @@ const Feed = (props: Props) => {
           {feed.data.title}
         </h1>
         <p className="text-xl text-gray-700 mb-6">{feed.data.description}</p>
-        <a href={feed.data.link} className="text-green-600 text-md">
-          Visit website &rarr;
-        </a>
+        <div className="flex">
+          <a href={feed.data.link} className="text-green-600 text-md">
+            Visit website
+          </a>
+          <span className="inline-block px-2 text-gray-700">&bull;</span>
+          <button className="text-red-400" onClick={remove}>
+            Delete feed
+          </button>
+        </div>
       </header>
 
       {feed.data.items.map(item => (
@@ -55,4 +74,4 @@ const mapStateToProps = (state: GlobalState) => {
   };
 };
 
-export default connect(mapStateToProps)(Feed);
+export default connect(mapStateToProps, { removeFeed })(Feed);
