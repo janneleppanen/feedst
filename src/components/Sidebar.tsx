@@ -1,12 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { connect } from "react-redux";
+import classnames from "classnames";
 
 interface Props {
   feeds: FeedList;
 }
 
 const Sidebar = ({ feeds }: Props) => {
+  let match = useRouteMatch("/feed/:id");
+
   return (
     <div className="bg-gray-800 w-64 p-6 text-white flex-col">
       <Link
@@ -22,10 +25,13 @@ const Sidebar = ({ feeds }: Props) => {
       </h2>
 
       {feeds.map((feed, index) => (
-        <div key={feed.url} className="mb-2">
+        <div key={feed.url}>
           <Link
             to={`/feed/${index}`}
-            className="truncate block hover:text-green-400 flex items-center"
+            className={classnames(
+              "truncate block hover:text-green-400 hover:bg-gray-900 flex items-center border-r-8 border-solid border-transparent -mx-6 px-6 py-2",
+              { "border-green-400": parseInt(match?.params.id) === index }
+            )}
           >
             {feed.data?.image ? (
               <img src={feed.data.image.url} alt="" className="w-8 h-8 mr-2" />
