@@ -10,7 +10,7 @@ export interface Props {
 
 const FeedItemLink = ({ title, link, date, author }: Props) => {
   const ago = formatDistance(new Date(), new Date(date));
-  const formattedDate = format(new Date(date), "LLLL, i y");
+  const formattedDate = format(new Date(date), "LLLL, d y");
   return (
     <a
       key={title}
