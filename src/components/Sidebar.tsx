@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Sidebar = ({ feeds }: Props) => {
-  let match = useRouteMatch("/feed/:id");
+  let match = useRouteMatch<{ id: string }>("/feed/:id");
 
   return (
     <div className="bg-gray-800 w-64 p-6 text-white flex-col">
@@ -30,7 +30,7 @@ const Sidebar = ({ feeds }: Props) => {
             to={`/feed/${index}`}
             className={classnames(
               "truncate block hover:text-green-400 hover:bg-gray-900 flex items-center border-r-8 border-solid border-transparent -mx-6 px-6 py-2",
-              { "border-green-400": parseInt(match?.params.id) === index }
+              { "border-green-400": parseInt(match?.params.id || "") === index }
             )}
           >
             {feed.data?.image ? (
