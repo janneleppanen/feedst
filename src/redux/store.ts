@@ -1,24 +1,17 @@
 import { createStore, applyMiddleware } from "redux";
 import ReduxThunk from "redux-thunk";
+import { persistStore, persistReducer } from "redux-persist";
+import localForage from "localforage";
 
 import reducers from "./index";
 
-const feeds = JSON.parse(localStorage.getItem("feeds") || "[]") as FeedState[];
-const persistedState = { feeds };
-const store = createStore(
-  reducers,
-  persistedState,
-  applyMiddleware(ReduxThunk)
-);
+const persistConfig = {
+  key: "root",
+  storage: localForage
+};
 
-store.subscribe(() => {
-  const feeds = store.getState().feeds;
-  const savedFeeds = feeds.map(feed => ({
-    url: feed.url,
-    data: undefined,
-    status: feed.status
-  }));
-  localStorage.setItem("feeds", JSON.stringify(savedFeeds));
-});
+const persistedReducer = persistReducer(persistConfig, reducers);
 
-export default store;
+export const store = createStore(persistedReducer, applyMiddleware(ReduxThunk));
+//@ts-ignore
+export const persistor = persistStore(store);
