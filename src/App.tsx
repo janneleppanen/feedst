@@ -13,13 +13,6 @@ interface Props {
 }
 
 const App = ({ feeds, loadFeed }: Props) => {
-  React.useEffect(() => {
-    const allFeedURLs = feeds.map(feed => feed.url);
-    for (let url of allFeedURLs) {
-      loadFeed(url);
-    }
-  }, []);
-
   return (
     <div className="flex h-screen text-sm font-sans">
       <Sidebar />
