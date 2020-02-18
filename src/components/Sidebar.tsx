@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
-import { connect } from "react-redux";
 import classnames from "classnames";
 
 interface Props {
@@ -50,10 +49,4 @@ const Sidebar = ({ feeds }: Props) => {
   );
 };
 
-const mapStateToProps = (state: GlobalState) => {
-  return {
-    feeds: state.feeds
-  };
-};
-
-export default connect(mapStateToProps)(Sidebar);
+export default Sidebar;
