@@ -16,6 +16,7 @@ const FeedItemLink = ({ title, link, date, author }: Props) => {
       key={title}
       href={link}
       className="border-solid block text-lg -mx-4 p-4 hover:bg-green-200"
+      data-testid={title}
     >
       <p className="text-gray-500 text-md">
         {ago} ago &bull; {formattedDate}
