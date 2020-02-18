@@ -12,10 +12,10 @@ interface Props {
   loadFeed: (url: string) => void;
 }
 
-const App = ({ feeds, loadFeed }: Props) => {
+const App = ({ feeds }: Props) => {
   return (
     <div className="flex h-screen text-sm font-sans">
-      <Sidebar />
+      <Sidebar feeds={feeds} />
       <main className="flex flex-1 flex-col overflow-auto h-full">
         <div className="max-w-screen-md w-full mx-auto my-10 p-10">
           <Switch>
