@@ -38,7 +38,7 @@
     "start": "netlify dev",
     "start:react": "npm run build:style && react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -65,7 +65,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn test"
     }
   },
   "lint-staged": {
