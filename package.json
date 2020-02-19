@@ -39,6 +39,8 @@
     "start:react": "npm run build:style && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test --watch",
+    "test:coverage": "react-scripts test  --watchAll=false --coverage --coverageDirectory=coverage/ --collectCoverageFrom=src/**/*.{ts,tsx} --collectCoverageFrom=!src/**/{*.stories.js,react-app-env.d.ts,serviceWorker.ts}",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
