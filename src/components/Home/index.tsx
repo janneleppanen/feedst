@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import FeedItemLink, { Props as FeedItemLinkProps } from "./Feed/FeedItemLink";
-import { loadFeed } from "../redux/FeedReducer";
+import FeedItemLink, { Props as FeedItemLinkProps } from "../Feed/FeedItemLink";
+import { loadFeed } from "../../redux/FeedReducer";
 
 interface Props {
   feeds: FeedList;
@@ -13,7 +13,7 @@ const Home = ({ loadFeed, feeds }: Props) => {
   const [newFeedURL, setNewFeedURL] = React.useState<string>("");
   const allFeedItems: FeedItemLinkProps[] = feeds.reduce(
     (all: FeedItemLinkProps[], feed) => {
-      if (!feed.data) {
+      if (!feed.data || !feed.data.items) {
         return all;
       }
 
@@ -56,8 +56,12 @@ const Home = ({ loadFeed, feeds }: Props) => {
           value={newFeedURL}
           placeholder="https://the-best-articles.io/feed"
           onChange={e => setNewFeedURL(e.currentTarget.value)}
+          data-testid="new-feed-input"
         />
-        <button className="py-2 px-5 bg-green-600 text-white rounded-md">
+        <button
+          className="py-2 px-5 bg-green-600 text-white rounded-md"
+          data-testid="new-feed-submit"
+        >
           Add RSS
         </button>
       </form>

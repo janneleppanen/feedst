@@ -1,4 +1,5 @@
 import { Dispatch } from "redux";
+import fetch from "node-fetch";
 
 const FEED_PARSE_URL = process.env.REACT_APP_FEED_PARSE_URL;
 
