@@ -20,7 +20,7 @@ interface Feed {
     url: string;
   };
   link: string;
-  items?: FeedItem[];
+  items: FeedItem[];
 }
 
 interface FeedItem {
