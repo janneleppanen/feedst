@@ -61,15 +61,15 @@ const FeedReducer = (state: FeedList = [], action: Action) => {
 };
 
 export function createFeed(url: string) {
-  return { type: CREATE_FEED, url };
+  return { type: CREATE_FEED as typeof CREATE_FEED, url };
 }
 
 export function updateFeed(url: string, data: Feed) {
-  return { type: UPDATE_FEED, url, data };
+  return { type: UPDATE_FEED as typeof UPDATE_FEED, url, data };
 }
 
 export function removeFeed(url: string) {
-  return { type: REMOVE_FEED, url };
+  return { type: REMOVE_FEED as typeof REMOVE_FEED, url };
 }
 
 export function loadFeed(url: string) {
