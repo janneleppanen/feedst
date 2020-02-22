@@ -31,4 +31,22 @@ describe("<Home />", () => {
       expect(store.getState().feeds.length).toBe(4);
     });
   });
+
+  test("should remove feed item if load fails", () => {
+    const { getByTestId } = render(<Home />);
+    const input: HTMLElement = getByTestId("new-feed-input");
+    const submit: HTMLElement = getByTestId("new-feed-submit");
+
+    // @ts-ignore
+    fetch.mockReturnValue(Promise.reject(new Response("4")));
+
+    fireEvent.change(input, {
+      target: { value: "https://add-a-new-feed.com/rss" }
+    });
+    fireEvent.click(submit);
+
+    wait(() => {
+      expect(store.getState().feeds.length).toBe(3);
+    });
+  });
 });

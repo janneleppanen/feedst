@@ -75,14 +75,18 @@ export function removeFeed(url: string) {
 export function loadFeed(url: string) {
   return async (dispatch: Dispatch) => {
     dispatch(createFeed(url));
-    const res = await fetch(FEED_PARSE_URL || "", {
-      method: "POST",
-      body: JSON.stringify({ rssFeeds: [url] })
-    });
-    const data = await res.json();
-    const feedData = data[url];
+    try {
+      const res = await fetch(FEED_PARSE_URL || "", {
+        method: "POST",
+        body: JSON.stringify({ rssFeeds: [url] })
+      });
+      const data = await res.json();
+      const feedData = data[url];
 
-    dispatch(updateFeed(url, feedData));
+      dispatch(updateFeed(url, feedData));
+    } catch (e) {
+      dispatch(removeFeed(url));
+    }
   };
 }
 
