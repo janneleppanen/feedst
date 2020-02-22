@@ -2,7 +2,7 @@ import React from "react";
 import fetch from "node-fetch";
 import { store } from "../../redux/store";
 
-import { render, fireEvent, waitForDomChange } from "../../utils/test-utils";
+import { render, fireEvent, wait } from "../../utils/test-utils";
 import Home from ".";
 
 jest.mock("node-fetch");
@@ -14,7 +14,7 @@ describe("<Home />", () => {
   });
 
   test("should add new feed", () => {
-    const { getByTestId, container } = render(<Home />);
+    const { getByTestId } = render(<Home />);
     const input: HTMLElement = getByTestId("new-feed-input");
     const submit: HTMLElement = getByTestId("new-feed-submit");
 
@@ -27,7 +27,7 @@ describe("<Home />", () => {
     fireEvent.click(submit);
 
     expect(fetch).toHaveBeenCalledTimes(1);
-    waitForDomChange({ container }).then(() => {
+    wait(() => {
       expect(store.getState().feeds.length).toBe(4);
     });
   });
