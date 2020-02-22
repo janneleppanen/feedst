@@ -22,6 +22,14 @@ const feeds: FeedList = [
           link: "http://podcast.tech/1",
           pubDate: "Mon, 3 Feb 2020 15:42:36 +0000",
           isoDate: "2020-02-03T15:42:36.000Z"
+        },
+        {
+          title: "2. Intro",
+          contentSnippet: "Snippet...",
+          content: "Content...",
+          link: "http://podcast.tech/2",
+          pubDate: "Mon, 2 Feb 2020 15:42:36 +0000",
+          isoDate: "2020-02-03T15:42:36.000Z"
         }
       ]
     }
@@ -38,7 +46,7 @@ const feeds: FeedList = [
       link: "http://another-podcast.tech",
       items: [
         {
-          title: "2. Intro",
+          title: "2. Hello World",
           contentSnippet: "Snippet...",
           content: "Content...",
           link: "http://another-podcast.tech/1",

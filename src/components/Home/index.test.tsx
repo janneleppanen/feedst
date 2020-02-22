@@ -10,7 +10,7 @@ jest.mock("node-fetch");
 describe("<Home />", () => {
   test("should show list of feed items", () => {
     const { getAllByTestId } = render(<Home />);
-    expect(getAllByTestId("feed-item-link").length).toBe(2);
+    expect(getAllByTestId("feed-item-link").length).toBe(3);
   });
 
   test("should add new feed", () => {
