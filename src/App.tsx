@@ -29,7 +29,6 @@ const App = ({ feeds }: Props) => {
 };
 
 const mapStateToProps = (state: GlobalState) => {
-  console.log(state.feeds);
   return {
     feeds: state.feeds
   };
