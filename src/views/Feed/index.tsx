@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { removeFeed } from "../../redux/FeedReducer";
-import FeedItemLink from "./FeedItemLink";
+import FeedItemLink from "../../components/FeedItemLink";
 
 interface Props {
   feeds: FeedList;
