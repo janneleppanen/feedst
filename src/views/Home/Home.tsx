@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import FeedItemLink, {
   Props as FeedItemLinkProps
-} from "../../components/FeedItemLink";
+} from "../../components/FeedItemLink/FeedItemLink";
 import { loadFeed } from "../../redux/FeedReducer";
 
 interface Props {
