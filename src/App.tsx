@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 
 import { loadFeed } from "./redux/FeedReducer";
 import Sidebar from "./components/Sidebar";
-import Home from "./components/Home";
-import Feed from "./components/Feed";
+import Home from "./views/Home";
+import Feed from "./views/Feed";
 
 interface Props {
   feeds: FeedState[];

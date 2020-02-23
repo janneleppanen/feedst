@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import FeedItemLink, { Props as FeedItemLinkProps } from "../Feed/FeedItemLink";
+import FeedItemLink, {
+  Props as FeedItemLinkProps
+} from "../../components/FeedItemLink";
 import { loadFeed } from "../../redux/FeedReducer";
 
 interface Props {
