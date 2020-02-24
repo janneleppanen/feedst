@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
 import "./styles/tailwind.css";
+import "./styles/app.css";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 import { store, persistor } from "./redux/store";

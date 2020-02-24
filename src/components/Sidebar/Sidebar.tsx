@@ -2,12 +2,15 @@ import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import classnames from "classnames";
 
+import NewFeedModal from "./NewFeedModal";
+
 interface Props {
   feeds: FeedList;
 }
 
 const Sidebar = ({ feeds }: Props) => {
   let match = useRouteMatch<{ id: string }>("/feed/:id");
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
     <div className="bg-gray-800 w-64 p-6 text-white flex-col">
@@ -46,6 +49,21 @@ const Sidebar = ({ feeds }: Props) => {
           </Link>
         </div>
       ))}
+
+      <hr className="my-4 border-gray-700" />
+
+      <button
+        className="hover:text-green-400"
+        onClick={() => setIsModalOpen(true)}
+        data-testid="open-new-feed-modal"
+      >
+        + Add new
+      </button>
+
+      <NewFeedModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };
