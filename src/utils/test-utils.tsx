@@ -68,9 +68,12 @@ const AllProviders: React.FC = ({ children }) => {
   store.replaceReducer(() => ({ feeds }));
 
   return (
-    <Provider store={store}>
-      <Router>{children}</Router>
-    </Provider>
+    <>
+      <Provider store={store}>
+        <Router>{children}</Router>
+      </Provider>
+      <div id="modal-root"></div>
+    </>
   );
 };
 

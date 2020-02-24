@@ -4,15 +4,12 @@ import { connect } from "react-redux";
 import FeedItemLink, {
   Props as FeedItemLinkProps
 } from "../../components/FeedItemLink/FeedItemLink";
-import { loadFeed } from "../../redux/FeedReducer";
 
 interface Props {
   feeds: FeedList;
-  loadFeed: (url: string) => void;
 }
 
-const Home = ({ loadFeed, feeds }: Props) => {
-  const [newFeedURL, setNewFeedURL] = React.useState<string>("");
+const Home = ({ feeds }: Props) => {
   const allFeedItems: FeedItemLinkProps[] = feeds.reduce(
     (all: FeedItemLinkProps[], feed) => {
       if (!feed.data || !feed.data.items) {
@@ -38,37 +35,8 @@ const Home = ({ loadFeed, feeds }: Props) => {
     return aDate.getTime() > bDate.getTime() ? -1 : 1;
   });
 
-  const handleFormSubmit = () => {
-    loadFeed(newFeedURL);
-    setNewFeedURL("");
-  };
-
   return (
     <>
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          handleFormSubmit();
-        }}
-        className="flex"
-      >
-        <input
-          className="border border-gray-300 border-solid rounded-md py-2 px-4 mr-2 flex-1"
-          type="text"
-          value={newFeedURL}
-          placeholder="https://the-best-articles.io/feed"
-          onChange={e => setNewFeedURL(e.currentTarget.value)}
-          data-testid="new-feed-input"
-        />
-        <button
-          className="py-2 px-5 bg-green-600 text-white rounded-md"
-          data-testid="new-feed-submit"
-        >
-          Add RSS
-        </button>
-      </form>
-      <hr className="my-10" />
-
       {sortedFeedItems.map(item => {
         return (
           <FeedItemLink
@@ -90,4 +58,4 @@ const mapStateToProps = (state: GlobalState) => {
   };
 };
 
-export default connect(mapStateToProps, { loadFeed })(Home);
+export default connect(mapStateToProps)(Home);
