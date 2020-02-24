@@ -13,7 +13,7 @@ const Sidebar = ({ feeds }: Props) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
-    <div className="bg-gray-800 w-64 p-6 text-white flex-col">
+    <aside className="bg-gray-800 w-64 p-6 text-white flex-col">
       <Link
         className="text-green-400 text-lg font-bold tracking-wider mb-10 block flex"
         to="/"
@@ -64,7 +64,7 @@ const Sidebar = ({ feeds }: Props) => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
-    </div>
+    </aside>
   );
 };
 
