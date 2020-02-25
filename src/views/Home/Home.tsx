@@ -1,16 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import Search from "../../components/Search";
 import FeedItemLink, {
   Props as FeedItemLinkProps
 } from "../../components/FeedItemLink/FeedItemLink";
 
 interface Props {
   feeds: FeedList;
+  searchTerm: string;
 }
 
-const Home = ({ feeds }: Props) => {
-  const allFeedItems: FeedItemLinkProps[] = feeds.reduce(
+const Home = ({ feeds, searchTerm }: Props) => {
+  let allFeedItems: FeedItemLinkProps[] = feeds.reduce(
     (all: FeedItemLinkProps[], feed) => {
       if (!feed.data || !feed.data.items) {
         return all;
@@ -29,6 +31,10 @@ const Home = ({ feeds }: Props) => {
     []
   );
 
+  allFeedItems = allFeedItems.filter(feedItem => {
+    return feedItem.title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
   const sortedFeedItems = allFeedItems.sort((a, b) => {
     const aDate = new Date(a.date);
     const bDate = new Date(b.date);
@@ -37,6 +43,10 @@ const Home = ({ feeds }: Props) => {
 
   return (
     <>
+      <Search />
+
+      <hr className="my-8" />
+
       {sortedFeedItems.map(item => {
         return (
           <FeedItemLink
@@ -52,9 +62,10 @@ const Home = ({ feeds }: Props) => {
   );
 };
 
-const mapStateToProps = (state: GlobalState) => {
+const mapStateToProps = ({ feeds, searchTerm }: GlobalState) => {
   return {
-    feeds: state.feeds
+    feeds,
+    searchTerm
   };
 };
 

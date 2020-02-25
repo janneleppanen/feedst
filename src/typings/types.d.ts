@@ -1,5 +1,5 @@
 interface GlobalState {
-  test: string;
+  searchTerm: string;
   feeds: FeedList;
 }
 

@@ -65,7 +65,7 @@ const feeds: FeedList = [
 
 const AllProviders: React.FC = ({ children }) => {
   // @ts-ignore
-  store.replaceReducer(() => ({ feeds }));
+  store.replaceReducer(() => ({ feeds, searchTerm: "" }));
 
   return (
     <>
