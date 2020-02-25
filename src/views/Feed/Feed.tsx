@@ -2,11 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import Search from "../../components/Search";
 import { removeFeed } from "../../redux/FeedReducer";
 import FeedItemLink from "../../components/FeedItemLink";
 
 interface Props {
   feeds: FeedList;
+  searchTerm: string;
   removeFeed: (url: string) => void;
   match: {
     params: {
@@ -16,7 +18,7 @@ interface Props {
 }
 
 const Feed = (props: Props) => {
-  const { feeds, removeFeed } = props;
+  const { feeds, removeFeed, searchTerm } = props;
   const feedId = parseInt(props.match.params.feedId);
   const feed = feeds[feedId] ? feeds[feedId] : null;
   const history = useHistory();
@@ -38,8 +40,16 @@ const Feed = (props: Props) => {
     history.push("/");
   };
 
+  const filteredFeedItems = feed.data.items.filter(feedItem =>
+    feedItem.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
+      <Search />
+
+      <hr className="my-8" />
+
       <header className="mb-16">
         <h1 className="text-4xl font-bold leading-tight mb-6">
           {feed.data.title}
@@ -56,7 +66,7 @@ const Feed = (props: Props) => {
         </div>
       </header>
 
-      {feed.data.items.map(item => (
+      {filteredFeedItems.map(item => (
         <FeedItemLink
           key={item.title}
           title={item.title}
@@ -68,9 +78,10 @@ const Feed = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state: GlobalState) => {
+const mapStateToProps = ({ feeds, searchTerm }: GlobalState) => {
   return {
-    feeds: state.feeds
+    feeds,
+    searchTerm
   };
 };
 
