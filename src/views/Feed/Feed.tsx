@@ -1,15 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
+import classnames from "classnames";
 
 import Search from "../../components/Search";
-import { removeFeed } from "../../redux/FeedReducer";
+import { removeFeed, loadFeed } from "../../redux/FeedReducer";
 import FeedItemLink from "../../components/FeedItemLink";
 
 interface Props {
   feeds: FeedList;
   searchTerm: string;
   removeFeed: (url: string) => void;
+  loadFeed: (url: string) => void;
   match: {
     params: {
       feedId: string;
@@ -18,17 +20,13 @@ interface Props {
 }
 
 const Feed = (props: Props) => {
-  const { feeds, removeFeed, searchTerm } = props;
+  const { feeds, removeFeed, loadFeed, searchTerm } = props;
   const feedId = parseInt(props.match.params.feedId);
   const feed = feeds[feedId] ? feeds[feedId] : null;
   const history = useHistory();
 
   if (!feed) {
     return <p>Feed not found.</p>;
-  }
-
-  if (feed.status === "loading") {
-    return <p>Loading feed data...</p>;
   }
 
   if (!feed.data) {
@@ -56,6 +54,13 @@ const Feed = (props: Props) => {
         </h1>
         <p className="text-xl text-gray-700 mb-6">{feed.data.description}</p>
         <div className="flex">
+          <button
+            onClick={() => loadFeed(feed.url)}
+            className="text-green-600 text-md"
+          >
+            Sync
+          </button>
+          <span className="inline-block px-2 text-gray-700">&bull;</span>
           <a href={feed.data.link} className="text-green-600 text-md">
             Visit website
           </a>
@@ -66,14 +71,16 @@ const Feed = (props: Props) => {
         </div>
       </header>
 
-      {filteredFeedItems.map(item => (
-        <FeedItemLink
-          key={item.title}
-          title={item.title}
-          link={item.link}
-          date={item.isoDate}
-        />
-      ))}
+      <div className={classnames({ "opacity-25": feed.status === "loading" })}>
+        {filteredFeedItems.map(item => (
+          <FeedItemLink
+            key={item.title}
+            title={item.title}
+            link={item.link}
+            date={item.isoDate}
+          />
+        ))}
+      </div>
     </>
   );
 };
@@ -85,4 +92,4 @@ const mapStateToProps = ({ feeds, searchTerm }: GlobalState) => {
   };
 };
 
-export default connect(mapStateToProps, { removeFeed })(Feed);
+export default connect(mapStateToProps, { removeFeed, loadFeed })(Feed);
