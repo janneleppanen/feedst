@@ -1,5 +1,5 @@
 import React from "react";
-import { format, formatDistance } from "date-fns";
+import { format, formatDistance, isToday } from "date-fns";
 
 export interface Props {
   title: string;
@@ -19,6 +19,11 @@ const FeedItemLink = ({ title, link, date, author }: Props) => {
       data-testid="feed-item-link"
     >
       <p className="text-gray-500 text-md">
+        {isToday(new Date(date)) && (
+          <span className="bg-green-400 text-white font-bold inline-block px-2 py-1 text-sm rounded-lg mr-2">
+            Today
+          </span>
+        )}
         {ago} ago &bull; {formattedDate}
       </p>
       <h2 data-testid={title} className="font-bold mb-1">
