@@ -6,9 +6,10 @@ import NewFeedModal from "./NewFeedModal";
 
 interface Props {
   feeds: FeedList;
+  onSyncClick: () => void;
 }
 
-const Sidebar = ({ feeds }: Props) => {
+const Sidebar = ({ feeds, onSyncClick }: Props) => {
   let match = useRouteMatch<{ id: string }>("/feed/:id");
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
@@ -22,8 +23,11 @@ const Sidebar = ({ feeds }: Props) => {
         RSS Reader
       </Link>
 
-      <h2 className="text-gray-100 uppercase tracking-wider text-sm opacity-50 mb-4">
-        Feeds
+      <h2 className="text-gray-600 uppercase tracking-wider text-sm mb-4 flex justify-between">
+        <span>Feeds</span>
+        <button className="hover:text-green-400" onClick={onSyncClick}>
+          Sync all
+        </button>
       </h2>
 
       {feeds.map((feed, index) => (
