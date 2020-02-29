@@ -5,6 +5,7 @@ import Search from "../../components/Search";
 import FeedItemLink, {
   Props as FeedItemLinkProps
 } from "../../components/FeedItemLink/FeedItemLink";
+import EmtpyState from "../../components/EmptyState";
 
 interface Props {
   feeds: FeedList;
@@ -40,6 +41,10 @@ const Home = ({ feeds, searchTerm }: Props) => {
     const bDate = new Date(b.date);
     return aDate.getTime() > bDate.getTime() ? -1 : 1;
   });
+
+  if (feeds.length === 0) {
+    return <EmtpyState />;
+  }
 
   return (
     <>

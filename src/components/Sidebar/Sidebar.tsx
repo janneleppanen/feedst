@@ -2,7 +2,8 @@ import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import classnames from "classnames";
 
-import NewFeedModal from "./NewFeedModal";
+import { NewFeedModal } from "../NewFeedForm";
+import SidebarWrapper from "./SidebarWrapper";
 
 interface Props {
   feeds: FeedList;
@@ -13,16 +14,12 @@ const Sidebar = ({ feeds, onSyncClick }: Props) => {
   let match = useRouteMatch<{ id: string }>("/feed/:id");
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
-  return (
-    <aside className="bg-gray-800 w-64 p-6 text-white flex-col">
-      <Link
-        className="text-green-400 text-lg font-bold tracking-wider mb-10 block flex"
-        to="/"
-      >
-        <div className="w-6 h-6 border-4 border-green-400 rounded-full mr-2"></div>
-        RSS Reader
-      </Link>
+  if (feeds.length === 0) {
+    return <SidebarWrapper />;
+  }
 
+  return (
+    <SidebarWrapper>
       <h2 className="text-gray-600 uppercase tracking-wider text-sm mb-4 flex justify-between">
         <span>Feeds</span>
         <button className="hover:text-green-400" onClick={onSyncClick}>
@@ -68,7 +65,7 @@ const Sidebar = ({ feeds, onSyncClick }: Props) => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
-    </aside>
+    </SidebarWrapper>
   );
 };
 

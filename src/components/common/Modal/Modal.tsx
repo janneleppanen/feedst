@@ -24,7 +24,7 @@ const Modal: React.FC<Props> = ({ children, isOpen, onClose }) => {
         }
       }}
     >
-      <div className="w-1/2 bg-white px-10 py-16 rounded-md relative shadow-lg">
+      <div className="w-full max-w-screen-md bg-white px-10 py-16 rounded-md relative shadow-lg">
         <button
           className="absolute top-0 right-0 py-2 px-4 text-2xl"
           onClick={onClose}
