@@ -1,11 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import FeedItemLink from "../../components/FeedItemLink";
 import demoFeeds from "../../utils/demo-feeds";
 import Search from "../../components/Search";
-import FeedItemLink, {
-  Props as FeedItemLinkProps
-} from "../../components/FeedItemLink/FeedItemLink";
 import EmtpyState from "../../components/EmptyState";
 import { loadFeed } from "../../redux/FeedReducer";
 
@@ -15,20 +13,19 @@ interface Props {
   loadFeed: (url: string) => void;
 }
 
+interface FeedItemWithAuthor extends FeedItem {
+  author?: string;
+}
+
 const Home = ({ feeds, searchTerm, loadFeed }: Props) => {
-  let allFeedItems: FeedItemLinkProps[] = feeds.reduce(
-    (all: FeedItemLinkProps[], feed) => {
+  let allFeedItems: FeedItemWithAuthor[] = feeds.reduce(
+    (all: FeedItemWithAuthor[], feed) => {
       if (!feed.data || !feed.data.items) {
         return all;
       }
 
       const newItems = feed.data.items.map(i => {
-        return {
-          title: i.title,
-          link: i.link,
-          date: i.isoDate,
-          author: feed.data?.title
-        };
+        return { ...i, author: feed.data?.title };
       });
       return [...all, ...newItems];
     },
@@ -40,8 +37,8 @@ const Home = ({ feeds, searchTerm, loadFeed }: Props) => {
   });
 
   const sortedFeedItems = allFeedItems.sort((a, b) => {
-    const aDate = new Date(a.date);
-    const bDate = new Date(b.date);
+    const aDate = new Date(a.isoDate);
+    const bDate = new Date(b.isoDate);
     return aDate.getTime() > bDate.getTime() ? -1 : 1;
   });
 
@@ -63,7 +60,7 @@ const Home = ({ feeds, searchTerm, loadFeed }: Props) => {
             key={`${item.link}`}
             title={item.title}
             link={item.link}
-            date={item.date}
+            date={item.isoDate}
             author={item.author}
           />
         );
