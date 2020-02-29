@@ -1,18 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import demoFeeds from "../../utils/demo-feeds";
 import Search from "../../components/Search";
 import FeedItemLink, {
   Props as FeedItemLinkProps
 } from "../../components/FeedItemLink/FeedItemLink";
 import EmtpyState from "../../components/EmptyState";
+import { loadFeed } from "../../redux/FeedReducer";
 
 interface Props {
   feeds: FeedList;
   searchTerm: string;
+  loadFeed: (url: string) => void;
 }
 
-const Home = ({ feeds, searchTerm }: Props) => {
+const Home = ({ feeds, searchTerm, loadFeed }: Props) => {
   let allFeedItems: FeedItemLinkProps[] = feeds.reduce(
     (all: FeedItemLinkProps[], feed) => {
       if (!feed.data || !feed.data.items) {
@@ -42,8 +45,10 @@ const Home = ({ feeds, searchTerm }: Props) => {
     return aDate.getTime() > bDate.getTime() ? -1 : 1;
   });
 
+  const addDemoFeeds = () => demoFeeds.forEach(url => loadFeed(url));
+
   if (feeds.length === 0) {
-    return <EmtpyState />;
+    return <EmtpyState onDemoButtonClick={addDemoFeeds} />;
   }
 
   return (
@@ -55,7 +60,7 @@ const Home = ({ feeds, searchTerm }: Props) => {
       {sortedFeedItems.map(item => {
         return (
           <FeedItemLink
-            key={item.title}
+            key={`${item.link}`}
             title={item.title}
             link={item.link}
             date={item.date}
@@ -74,4 +79,4 @@ const mapStateToProps = ({ feeds, searchTerm }: GlobalState) => {
   };
 };
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, { loadFeed })(Home);
