@@ -74,7 +74,7 @@ const Feed = (props: Props) => {
       <div className={classnames({ "opacity-25": feed.status === "loading" })}>
         {filteredFeedItems.map(item => (
           <FeedItemLink
-            key={item.title}
+            key={`${item.link}`}
             title={item.title}
             link={item.link}
             date={item.isoDate}
