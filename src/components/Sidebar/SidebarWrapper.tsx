@@ -1,15 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { ReactComponent as Logo } from "../../assets/feedst-logo.svg";
+
 const SidebarWrapper: React.FC = ({ children }) => {
   return (
     <aside className="bg-gray-800 w-64 p-6 text-white flex-col">
       <Link
-        className="text-green-400 text-lg font-bold tracking-wider mb-10 block flex"
+        className="text-xl font-bold tracking-wider mb-10 block flex items-center"
         to="/"
       >
-        <div className="w-6 h-6 border-4 border-green-400 rounded-full mr-2"></div>
-        RSS Reader
+        <div className="mr-4 w-8">
+          <Logo className="w-full" />
+        </div>
+        Feedst
       </Link>
       {children}
     </aside>
