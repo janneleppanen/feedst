@@ -72,7 +72,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,tsx,md}": [
+    "*.{js,ts,tsx}": [
       "yarn lint",
       "prettier --write"
     ]
