@@ -1,7 +1,7 @@
 <br />
 
 <p align="center">
-    <img src="http://github.com/janneleppanen/feedst/blob/master/logo/feedst-logo?raw=true" alt="Feedst" width="300" />
+    <img src="https://github.com/janneleppanen/feedst/raw/master/logo/feedst-logo.png?raw=true" alt="Feedst" width="300" />
 </p>
 
 <h1 align="center">Feedst provides a delightful way to manage all your RSS feeds in a one place.</h1>
