@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import { loadFeed } from "./redux/FeedReducer";
 import Sidebar from "./components/Sidebar";
+import Footer from "./components/Footer";
 import Home from "./views/Home";
 import Feed from "./views/Feed";
 
@@ -20,14 +21,15 @@ const App = ({ feeds, loadFeed }: Props) => {
   return (
     <div className="flex h-screen text-sm font-sans">
       <Sidebar feeds={feeds} onSyncClick={syncAllFeeds} />
-      <main className="flex flex-1 flex-col overflow-auto h-full">
-        <div className="max-w-screen-md w-full mx-auto my-10 p-10">
+      <div className="flex flex-1 flex-col overflow-auto h-full">
+        <main className="max-w-screen-md w-full mx-auto my-10 p-10">
           <Switch>
             <Route path="/feed/:feedId" component={Feed}></Route>
             <Route path="/" component={Home}></Route>
           </Switch>
-        </div>
-      </main>
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 };
