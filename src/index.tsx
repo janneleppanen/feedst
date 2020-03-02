@@ -6,18 +6,21 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import "./styles/tailwind.css";
 import "./styles/app.css";
+import ErrorBoundary from "./utils/ErrorBoundary";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 import { store, persistor } from "./redux/store";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <Router>
-        <App />
-      </Router>
-    </PersistGate>
-  </Provider>,
+  <ErrorBoundary>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <App />
+        </Router>
+      </PersistGate>
+    </Provider>
+  </ErrorBoundary>,
   document.getElementById("root")
 );
 
