@@ -8,6 +8,8 @@
 
 <br />
 
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+
 ## 🛠 Built with
 
 [React](https://reactjs.org/) for rendering UIs  
