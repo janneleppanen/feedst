@@ -31,10 +31,7 @@ const NewFeedForm: React.FC<Props> = ({ loadFeed }) => {
         onChange={e => setNewFeedURL(e.currentTarget.value)}
         data-testid="new-feed-input"
       />
-      <button
-        className="py-2 px-5 bg-green-600 text-white rounded-md"
-        data-testid="new-feed-submit"
-      >
+      <button className="btn" data-testid="new-feed-submit">
         Add Feed
       </button>
     </form>

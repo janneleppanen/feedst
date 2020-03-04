@@ -1,6 +1,7 @@
 interface GlobalState {
   searchTerm: string;
   feeds: FeedList;
+  activeFeedItem: FeedItem | null;
 }
 
 type FeedList = FeedState[];
@@ -26,7 +27,8 @@ interface Feed {
 interface FeedItem {
   title: string;
   contentSnippet: string;
-  content: string;
+  content?: string;
+  "content:encoded"?: string;
   link: string;
   pubDate: string;
   isoDate: string;

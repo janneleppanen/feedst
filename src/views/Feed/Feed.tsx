@@ -5,6 +5,7 @@ import classnames from "classnames";
 
 import Search from "../../components/Search";
 import { removeFeed, loadFeed } from "../../redux/FeedReducer";
+import { setActiveFeedItem } from "../../redux/ActiveFeedItemReducer";
 import FeedItemLink from "../../components/FeedItemLink";
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
   searchTerm: string;
   removeFeed: (url: string) => void;
   loadFeed: (url: string) => void;
+  setActiveFeedItem: (article: FeedItem) => void;
   match: {
     params: {
       feedId: string;
@@ -20,7 +22,7 @@ interface Props {
 }
 
 const Feed = (props: Props) => {
-  const { feeds, removeFeed, loadFeed, searchTerm } = props;
+  const { feeds, removeFeed, loadFeed, searchTerm, setActiveFeedItem } = props;
   const feedId = parseInt(props.match.params.feedId);
   const feed = feeds[feedId] ? feeds[feedId] : null;
   const history = useHistory();
@@ -78,6 +80,7 @@ const Feed = (props: Props) => {
             title={item.title}
             link={item.link}
             date={item.isoDate}
+            onClick={() => setActiveFeedItem(item)}
           />
         ))}
       </div>
@@ -92,4 +95,8 @@ const mapStateToProps = ({ feeds, searchTerm }: GlobalState) => {
   };
 };
 
-export default connect(mapStateToProps, { removeFeed, loadFeed })(Feed);
+export default connect(mapStateToProps, {
+  removeFeed,
+  loadFeed,
+  setActiveFeedItem
+})(Feed);
