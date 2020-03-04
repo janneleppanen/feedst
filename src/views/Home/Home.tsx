@@ -6,18 +6,20 @@ import demoFeeds from "../../utils/demo-feeds";
 import Search from "../../components/Search";
 import EmtpyState from "../../components/EmptyState";
 import { loadFeed } from "../../redux/FeedReducer";
+import { setActiveFeedItem } from "../../redux/ActiveFeedItemReducer";
 
 interface Props {
   feeds: FeedList;
   searchTerm: string;
   loadFeed: (url: string) => void;
+  setActiveFeedItem: (feedItem: FeedItem) => void;
 }
 
 interface FeedItemWithAuthor extends FeedItem {
   author?: string;
 }
 
-const Home = ({ feeds, searchTerm, loadFeed }: Props) => {
+const Home = ({ feeds, searchTerm, loadFeed, setActiveFeedItem }: Props) => {
   let allFeedItems: FeedItemWithAuthor[] = feeds.reduce(
     (all: FeedItemWithAuthor[], feed) => {
       if (!feed.data || !feed.data.items) {
@@ -62,6 +64,7 @@ const Home = ({ feeds, searchTerm, loadFeed }: Props) => {
             link={item.link}
             date={item.isoDate}
             author={item.author}
+            onClick={() => setActiveFeedItem(item)}
           />
         );
       })}
@@ -76,4 +79,4 @@ const mapStateToProps = ({ feeds, searchTerm }: GlobalState) => {
   };
 };
 
-export default connect(mapStateToProps, { loadFeed })(Home);
+export default connect(mapStateToProps, { loadFeed, setActiveFeedItem })(Home);

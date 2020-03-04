@@ -6,17 +6,18 @@ export interface Props {
   link: string;
   date: string;
   author?: string;
+  onClick: () => void;
 }
 
-const FeedItemLink = ({ title, link, date, author }: Props) => {
+const FeedItemLink = ({ title, date, author, onClick }: Props) => {
   const ago = formatDistance(new Date(), new Date(date));
   const formattedDate = format(new Date(date), "LLLL, d y");
   return (
-    <a
+    <button
       key={title}
-      href={link}
-      className="border-solid block text-lg -mx-4 p-4 hover:bg-green-200"
+      className="border-solid block text-lg -mx-4 p-4 hover:bg-green-200 block w-full text-left"
       data-testid="feed-item-link"
+      onClick={onClick}
     >
       <p className="text-gray-500 text-md">
         {isToday(new Date(date)) && (
@@ -30,7 +31,7 @@ const FeedItemLink = ({ title, link, date, author }: Props) => {
         {title}
       </h2>
       {author && <p className="text-gray-500">{author}</p>}
-    </a>
+    </button>
   );
 };
 
