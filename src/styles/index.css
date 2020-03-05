@@ -4,5 +4,6 @@
 
 @import "components/button";
 @import "components/single-feed-item";
+@import "components/slide-content";
 
 @import "tailwindcss/utilities";

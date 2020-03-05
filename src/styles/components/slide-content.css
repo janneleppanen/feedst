@@ -1,0 +1,35 @@
+.slide-enter {
+  background: rgba(0, 0, 0, 0);
+
+  > div {
+    transform: translateX(30%);
+  }
+}
+
+.slide-enter.slide-enter-active {
+  background: rgba(0, 0, 0, 0.6);
+  transition: all 0.25s ease-out;
+
+  > div {
+    transition: all 0.25s ease-out;
+    transform: translateX(0);
+  }
+}
+
+.slide-leave {
+  background: rgba(0, 0, 0, 0.6);
+
+  > div {
+    transform: translateX(0);
+  }
+}
+
+.slide-leave.slide-leave-active {
+  background: rgba(0, 0, 0, 0);
+  transition: all 0.15s ease-in;
+
+  > div {
+    transition: all 0.15s ease-in;
+    transform: translateX(30%);
+  }
+}

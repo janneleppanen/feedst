@@ -25,11 +25,10 @@ const App = ({ feeds, article, loadFeed, removeActiveFeedItem }: Props) => {
 
   return (
     <div className="flex h-screen text-sm font-sans">
-      {article && (
-        <SlideContent onClose={() => removeActiveFeedItem()}>
-          <FeedItemArticle feedItem={article} />
-        </SlideContent>
-      )}
+      <SlideContent onClose={() => removeActiveFeedItem()} isOpen={!!article}>
+        {article && <FeedItemArticle feedItem={article} />}
+      </SlideContent>
+
       <Sidebar feeds={feeds} onSyncClick={syncAllFeeds} />
       <div className="flex flex-1 flex-col overflow-auto h-full">
         <main className="max-w-screen-md w-full mx-auto my-10 p-10 flex-1">
