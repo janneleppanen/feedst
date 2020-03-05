@@ -1,5 +1,5 @@
 .slide-enter {
-  background: rgba(0, 0, 0, 0);
+  opacity: 0;
 
   > div {
     transform: translateX(30%);
@@ -7,7 +7,7 @@
 }
 
 .slide-enter.slide-enter-active {
-  background: rgba(0, 0, 0, 0.6);
+  opacity: 1;
   transition: all 0.25s ease-out;
 
   > div {
@@ -17,7 +17,7 @@
 }
 
 .slide-leave {
-  background: rgba(0, 0, 0, 0.6);
+  opacity: 1;
 
   > div {
     transform: translateX(0);
@@ -25,7 +25,7 @@
 }
 
 .slide-leave.slide-leave-active {
-  background: rgba(0, 0, 0, 0);
+  opacity: 0;
   transition: all 0.15s ease-in;
 
   > div {
