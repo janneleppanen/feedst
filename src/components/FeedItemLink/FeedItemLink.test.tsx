@@ -1,8 +1,9 @@
 import React from "react";
-import { render } from "@testing-library/react";
+
+import { render } from "../../utils/test-utils";
 import FeedItemLink from ".";
 
-test("renders feed link", () => {
+test("renders a feed link", () => {
   const title = "Hello World";
 
   const { queryByTestId } = render(
@@ -11,6 +12,8 @@ test("renders feed link", () => {
       link="https://test.com"
       date="0"
       author="John Doe"
+      feedId="1"
+      feedItemId="2"
     />
   );
 

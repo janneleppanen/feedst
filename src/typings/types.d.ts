@@ -1,7 +1,6 @@
 interface GlobalState {
   searchTerm: string;
   feeds: FeedList;
-  activeFeedItem: FeedItem | null;
 }
 
 type FeedList = FeedState[];

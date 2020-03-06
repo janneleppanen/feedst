@@ -6,28 +6,33 @@ import demoFeeds from "../../utils/demo-feeds";
 import Search from "../../components/Search";
 import EmtpyState from "../../components/EmptyState";
 import { loadFeed } from "../../redux/FeedReducer";
-import { setActiveFeedItem } from "../../redux/ActiveFeedItemReducer";
 
 interface Props {
   feeds: FeedList;
   searchTerm: string;
   loadFeed: (url: string) => void;
-  setActiveFeedItem: (feedItem: FeedItem) => void;
 }
 
 interface FeedItemWithAuthor extends FeedItem {
-  author?: string;
+  author: string;
+  id: string;
+  feedId: string;
 }
 
-const Home = ({ feeds, searchTerm, loadFeed, setActiveFeedItem }: Props) => {
+const Home = ({ feeds, searchTerm, loadFeed }: Props) => {
   let allFeedItems: FeedItemWithAuthor[] = feeds.reduce(
-    (all: FeedItemWithAuthor[], feed) => {
+    (all: FeedItemWithAuthor[], feed, feedId) => {
       if (!feed.data || !feed.data.items) {
         return all;
       }
 
-      const newItems = feed.data.items.map(i => {
-        return { ...i, author: feed.data?.title };
+      const newItems = feed.data.items.map((item, id) => {
+        return {
+          ...item,
+          author: feed.data?.title || "",
+          id: id.toString(),
+          feedId: feedId.toString()
+        };
       });
       return [...all, ...newItems];
     },
@@ -64,7 +69,8 @@ const Home = ({ feeds, searchTerm, loadFeed, setActiveFeedItem }: Props) => {
             link={item.link}
             date={item.isoDate}
             author={item.author}
-            onClick={() => setActiveFeedItem(item)}
+            feedId={item.feedId?.toString() || ""}
+            feedItemId={item.id?.toString() || ""}
           />
         );
       })}
@@ -79,4 +85,4 @@ const mapStateToProps = ({ feeds, searchTerm }: GlobalState) => {
   };
 };
 
-export default connect(mapStateToProps, { loadFeed, setActiveFeedItem })(Home);
+export default connect(mapStateToProps, { loadFeed })(Home);
