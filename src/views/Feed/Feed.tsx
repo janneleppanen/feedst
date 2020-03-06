@@ -5,7 +5,6 @@ import classnames from "classnames";
 
 import Search from "../../components/Search";
 import { removeFeed, loadFeed } from "../../redux/FeedReducer";
-import { setActiveFeedItem } from "../../redux/ActiveFeedItemReducer";
 import FeedItemLink from "../../components/FeedItemLink";
 
 interface Props {
@@ -13,7 +12,6 @@ interface Props {
   searchTerm: string;
   removeFeed: (url: string) => void;
   loadFeed: (url: string) => void;
-  setActiveFeedItem: (article: FeedItem) => void;
   match: {
     params: {
       feedId: string;
@@ -22,7 +20,7 @@ interface Props {
 }
 
 const Feed = (props: Props) => {
-  const { feeds, removeFeed, loadFeed, searchTerm, setActiveFeedItem } = props;
+  const { feeds, removeFeed, loadFeed, searchTerm } = props;
   const feedId = parseInt(props.match.params.feedId);
   const feed = feeds[feedId] ? feeds[feedId] : null;
   const history = useHistory();
@@ -74,13 +72,14 @@ const Feed = (props: Props) => {
       </header>
 
       <div className={classnames({ "opacity-25": feed.status === "loading" })}>
-        {filteredFeedItems.map(item => (
+        {filteredFeedItems.map((item, index) => (
           <FeedItemLink
             key={`${item.link}`}
             title={item.title}
             link={item.link}
             date={item.isoDate}
-            onClick={() => setActiveFeedItem(item)}
+            feedId={feedId.toString()}
+            feedItemId={index.toString()}
           />
         ))}
       </div>
@@ -97,6 +96,5 @@ const mapStateToProps = ({ feeds, searchTerm }: GlobalState) => {
 
 export default connect(mapStateToProps, {
   removeFeed,
-  loadFeed,
-  setActiveFeedItem
+  loadFeed
 })(Feed);
