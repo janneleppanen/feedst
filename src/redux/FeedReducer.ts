@@ -90,4 +90,14 @@ export function loadFeed(url: string) {
   };
 }
 
+export function getFeedItem(
+  state: FeedList = [],
+  feedItemId: number,
+  feedId: number
+) {
+  const feed = state[feedId];
+  let feedItem = feed?.data?.items[feedItemId];
+  return feedItem || null;
+}
+
 export default FeedReducer;
