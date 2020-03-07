@@ -6,6 +6,7 @@ interface GlobalState {
 type FeedStateList = FeedState[];
 
 interface FeedState {
+  id: string;
   url: string;
   data?: Feed;
   status: FeedStatus;
@@ -24,6 +25,7 @@ interface Feed {
 }
 
 interface FeedItem {
+  id: string;
   title: string;
   contentSnippet: string;
   content?: string;
