@@ -29,7 +29,7 @@ const Feed = (props: Props) => {
     return <p>Feed not found.</p>;
   }
 
-  if (!feed.data) {
+  if (!feed.items) {
     return <p>Feed not found.</p>;
   }
 
@@ -38,7 +38,7 @@ const Feed = (props: Props) => {
     history.push("/");
   };
 
-  const filteredFeedItems = feed.data.items.filter(feedItem =>
+  const filteredFeedItems = feed.items.filter(feedItem =>
     feedItem.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -49,10 +49,8 @@ const Feed = (props: Props) => {
       <hr className="my-8" />
 
       <header className="mb-16">
-        <h1 className="text-4xl font-bold leading-tight mb-6">
-          {feed.data.title}
-        </h1>
-        <p className="text-xl text-gray-700 mb-6">{feed.data.description}</p>
+        <h1 className="text-4xl font-bold leading-tight mb-6">{feed.title}</h1>
+        <p className="text-xl text-gray-700 mb-6">{feed.description}</p>
         <div className="flex">
           <button
             onClick={() => loadFeed(feed.url)}
@@ -61,7 +59,7 @@ const Feed = (props: Props) => {
             Sync
           </button>
           <span className="inline-block px-2 text-gray-700">&bull;</span>
-          <a href={feed.data.link} className="text-green-600 text-md">
+          <a href={feed.link} className="text-green-600 text-md">
             Visit website
           </a>
           <span className="inline-block px-2 text-gray-700">&bull;</span>

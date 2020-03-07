@@ -39,15 +39,15 @@ const Sidebar = ({ feeds, onSyncClick }: Props) => {
             )}
             data-testid="sidebar-feed-item"
           >
-            {feed.data?.image ? (
-              <img src={feed.data.image.url} alt="" className="w-8 h-8 mr-2" />
+            {feed?.image ? (
+              <img src={feed.image.url} alt="" className="w-8 h-8 mr-2" />
             ) : (
               <div className="bg-green-400 w-8 h-8 mr-2 text-gray-800 font-bold flex items-center justify-center">
-                <span>{feed.data?.title[0]}</span>
+                <span>{feed?.title}</span>
               </div>
             )}
             <div className="truncate block flex-1 text-sm">
-              {feed.status === "ready" ? feed.data?.title : "loading..."}
+              {feed.status === "ready" ? feed?.title : "loading..."}
             </div>
           </Link>
         </div>

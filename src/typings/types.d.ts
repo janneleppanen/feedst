@@ -5,23 +5,22 @@ interface GlobalState {
 
 type FeedList = Feed[];
 
-interface Feed {
-  id: string;
-  url: string;
-  data?: FeedData;
-  status: FeedStatus;
+interface FeedData {
+  title?: string;
+  description?: string;
+  image?: {
+    url: string;
+  };
+  link?: string;
+  items: FeedItem[];
 }
 
 type FeedStatus = "loading" | "ready";
 
-interface FeedData {
-  title: string;
-  description: string;
-  image?: {
-    url: string;
-  };
-  link: string;
-  items: FeedItem[];
+interface Feed extends FeedData {
+  id: string;
+  url: string;
+  status: FeedStatus;
 }
 
 interface FeedItem {
