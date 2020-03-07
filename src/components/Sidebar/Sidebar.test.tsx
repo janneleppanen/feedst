@@ -15,17 +15,23 @@ jest.mock("node-fetch");
 
 describe("<Sidebar/>", () => {
   test("renders feed items", () => {
-    const { getAllByTestId } = render(<Sidebar feeds={feeds} />);
+    const { getAllByTestId } = render(
+      <Sidebar feeds={feeds} onSyncClick={() => {}} />
+    );
     expect(getAllByTestId("sidebar-feed-item").length).toBe(3);
   });
 
   test("show loading state", () => {
-    const { getByText } = render(<Sidebar feeds={feeds} />);
+    const { getByText } = render(
+      <Sidebar feeds={feeds} onSyncClick={() => {}} />
+    );
     expect(getByText("loading...")).toBeTruthy();
   });
 
   test("should add new feed", async () => {
-    const { getByTestId, container } = render(<Sidebar feeds={feeds} />);
+    const { getByTestId, container } = render(
+      <Sidebar feeds={feeds} onSyncClick={() => {}} />
+    );
     const openNewFeedModalButton: HTMLElement = getByTestId(
       "open-new-feed-modal"
     );
@@ -53,7 +59,9 @@ describe("<Sidebar/>", () => {
   });
 
   test("should remove feed item if load fails", async () => {
-    const { getByTestId, container } = render(<Sidebar feeds={feeds} />);
+    const { getByTestId, container } = render(
+      <Sidebar feeds={feeds} onSyncClick={() => {}} />
+    );
     const openNewFeedModalButton: HTMLElement = getByTestId(
       "open-new-feed-modal"
     );
