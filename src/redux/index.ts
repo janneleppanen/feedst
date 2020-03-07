@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 
-import FeedReducer from "./FeedReducer";
-import SearchReducer from "./SearchReducer";
+import { reducer as feeds } from "./FeedRedux";
+import { reducer as searchTerm } from "./SearchRedux";
 
 export default combineReducers({
-  feeds: FeedReducer,
-  searchTerm: SearchReducer
+  feeds,
+  searchTerm
 });

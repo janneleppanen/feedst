@@ -25,7 +25,7 @@ type RemoveAction = {
   url: string;
 };
 
-const FeedReducer = (state: FeedList = [], action: Action) => {
+const reducer = (state: FeedList = [], action: Action) => {
   switch (action.type) {
     case CREATE_FEED:
       const alreadyExists = state.find(f => f.url === action.url);
@@ -60,19 +60,23 @@ const FeedReducer = (state: FeedList = [], action: Action) => {
   }
 };
 
-export function createFeed(url: string) {
-  return { type: CREATE_FEED as typeof CREATE_FEED, url };
-}
+const createFeed = (url: string) => ({
+  type: CREATE_FEED as typeof CREATE_FEED,
+  url
+});
 
-export function updateFeed(url: string, data: Feed) {
-  return { type: UPDATE_FEED as typeof UPDATE_FEED, url, data };
-}
+const updateFeed = (url: string, data: Feed) => ({
+  type: UPDATE_FEED as typeof UPDATE_FEED,
+  url,
+  data
+});
 
-export function removeFeed(url: string) {
-  return { type: REMOVE_FEED as typeof REMOVE_FEED, url };
-}
+const removeFeed = (url: string) => ({
+  type: REMOVE_FEED as typeof REMOVE_FEED,
+  url
+});
 
-export function loadFeed(url: string) {
+const loadFeed = (url: string) => {
   return async (dispatch: Dispatch) => {
     dispatch(createFeed(url));
     try {
@@ -88,16 +92,16 @@ export function loadFeed(url: string) {
       dispatch(removeFeed(url));
     }
   };
-}
+};
 
-export function getFeedItem(
+const getFeedItem = (
   state: FeedList = [],
   feedItemId: number,
   feedId: number
-) {
+) => {
   const feed = state[feedId];
   let feedItem = feed?.data?.items[feedItemId];
   return feedItem || null;
-}
+};
 
-export default FeedReducer;
+export { reducer, createFeed, updateFeed, removeFeed, loadFeed, getFeedItem };

@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { loadFeed } from "./redux/FeedReducer";
+import { loadFeed } from "./redux/FeedRedux";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
 import Home from "./views/Home";

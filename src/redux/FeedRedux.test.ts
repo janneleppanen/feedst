@@ -1,4 +1,4 @@
-import reducer, { createFeed, updateFeed, removeFeed } from "./FeedReducer";
+import { reducer, createFeed, updateFeed, removeFeed } from "./FeedRedux";
 
 describe("FeedReducer", () => {
   test("should create a new feed", () => {
