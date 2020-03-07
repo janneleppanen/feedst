@@ -43,7 +43,7 @@ const Sidebar = ({ feeds, onSyncClick }: Props) => {
               <img src={feed.image.url} alt="" className="w-8 h-8 mr-2" />
             ) : (
               <div className="bg-green-400 w-8 h-8 mr-2 text-gray-800 font-bold flex items-center justify-center">
-                <span>{feed?.title}</span>
+                <span>{feed?.title && feed.title[0]}</span>
               </div>
             )}
             <div className="truncate block flex-1 text-sm">
