@@ -30,7 +30,7 @@ const Home = ({ feeds, searchTerm, loadFeed }: Props) => {
         return {
           ...item,
           author: feed?.title || "",
-          feedId: feed.id
+          feedId: feed.id || ""
         };
       });
       return [...all, ...newItems];

@@ -1,6 +1,5 @@
 import { Dispatch } from "redux";
 import fetch from "node-fetch";
-import { v4 as uuidv4 } from "uuid";
 
 const FEED_PARSE_URL = process.env.REACT_APP_FEED_PARSE_URL;
 
@@ -29,9 +28,7 @@ type RemoveAction = {
 const feed = (state: undefined, action: Action) => {
   switch (action.type) {
     case CREATE_FEED:
-      const id = uuidv4();
       return {
-        id,
         url: action.url,
         status: "loading",
         items: []
@@ -61,10 +58,8 @@ const reducer = (state: FeedList = [], action: Action) => {
           updatedFeed.status = "ready";
 
           updatedFeed.items = updatedFeed.items.map(feedItem => {
-            const id = uuidv4();
             return {
-              ...feedItem,
-              id
+              ...feedItem
             };
           });
         }

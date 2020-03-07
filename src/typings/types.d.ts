@@ -6,6 +6,7 @@ interface GlobalState {
 type FeedList = Feed[];
 
 interface FeedData {
+  id?: string;
   title?: string;
   description?: string;
   image?: {
@@ -18,7 +19,6 @@ interface FeedData {
 type FeedStatus = "loading" | "ready";
 
 interface Feed extends FeedData {
-  id: string;
   url: string;
   status: FeedStatus;
 }
