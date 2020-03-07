@@ -7,7 +7,8 @@ describe("FeedReducer", () => {
       {
         id: "1234",
         status: "loading",
-        url
+        url,
+        items: []
       }
     ];
     const state = reducer([], createFeed(url));
@@ -15,13 +16,12 @@ describe("FeedReducer", () => {
     expect(state.length).toEqual(1);
     expect(state[0]?.status).toEqual(expectedState[0].status);
     expect(state[0]?.url).toEqual(expectedState[0].url);
-    expect(typeof state[0]?.id).toEqual("string");
   });
 
   test("should update a feed data and change status", () => {
     const id = "1234";
     const url = "https://feed.url";
-    const initialState: FeedList = [{ id, url, status: "loading" }];
+    const initialState: FeedList = [{ id, url, status: "loading", items: [] }];
     const data = {
       title: "Title",
       description: "Description",
