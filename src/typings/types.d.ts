@@ -1,9 +1,9 @@
 interface GlobalState {
   searchTerm: string;
-  feeds: FeedList;
+  feeds: FeedStateList;
 }
 
-type FeedList = FeedState[];
+type FeedStateList = FeedState[];
 
 interface FeedState {
   url: string;

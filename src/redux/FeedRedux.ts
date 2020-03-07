@@ -25,7 +25,7 @@ type RemoveAction = {
   url: string;
 };
 
-const reducer = (state: FeedList = [], action: Action) => {
+const reducer = (state: FeedStateList = [], action: Action) => {
   switch (action.type) {
     case CREATE_FEED:
       const alreadyExists = state.find(f => f.url === action.url);
@@ -95,7 +95,7 @@ const loadFeed = (url: string) => {
 };
 
 const getFeedItem = (
-  state: FeedList = [],
+  state: FeedStateList = [],
   feedItemId: number,
   feedId: number
 ) => {

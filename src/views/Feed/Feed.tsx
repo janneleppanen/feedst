@@ -8,7 +8,7 @@ import { removeFeed, loadFeed } from "../../redux/FeedRedux";
 import FeedItemLink from "../../components/FeedItemLink";
 
 interface Props {
-  feeds: FeedList;
+  feeds: FeedStateList;
   searchTerm: string;
   removeFeed: (url: string) => void;
   loadFeed: (url: string) => void;
