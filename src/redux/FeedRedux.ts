@@ -1,5 +1,6 @@
 import { Dispatch } from "redux";
 import fetch from "node-fetch";
+import { v4 as uuidv4 } from "uuid";
 
 const FEED_PARSE_URL = process.env.REACT_APP_FEED_PARSE_URL;
 
@@ -25,6 +26,19 @@ type RemoveAction = {
   url: string;
 };
 
+const feed = (state: undefined, action: Action) => {
+  switch (action.type) {
+    case CREATE_FEED:
+      const id = uuidv4();
+      return {
+        id,
+        url: action.url,
+        data: undefined,
+        status: "loading"
+      } as FeedState;
+  }
+};
+
 const reducer = (state: FeedStateList = [], action: Action) => {
   switch (action.type) {
     case CREATE_FEED:
@@ -37,20 +51,24 @@ const reducer = (state: FeedStateList = [], action: Action) => {
           };
         });
       }
-      return [
-        ...state,
-        {
-          url: action.url,
-          data: undefined,
-          status: "loading"
-        } as FeedState
-      ];
+      return [...state, feed(undefined, action)];
     case UPDATE_FEED:
       return state.map(feed => {
         if (feed.url === action.url) {
           feed.data = action.data;
           feed.status = "ready";
         }
+
+        if (feed.data && feed.data.items) {
+          feed.data.items = feed.data.items.map(feedItem => {
+            const id = uuidv4();
+            return {
+              ...feedItem,
+              id
+            };
+          });
+        }
+
         return feed;
       });
     case REMOVE_FEED:
@@ -96,11 +114,11 @@ const loadFeed = (url: string) => {
 
 const getFeedItem = (
   state: FeedStateList = [],
-  feedItemId: number,
-  feedId: number
+  feedItemId: string,
+  feedId: string
 ) => {
-  const feed = state[feedId];
-  return feed?.data?.items[feedItemId];
+  const feed = state.find(feed => feed.id === feedId);
+  return feed?.data?.items.find(feedItem => feedItem.id === feedItemId);
 };
 
 export { reducer, createFeed, updateFeed, removeFeed, loadFeed, getFeedItem };

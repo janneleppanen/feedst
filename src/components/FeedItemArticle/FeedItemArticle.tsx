@@ -47,7 +47,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   const { feedId, feedItemId } = props.match.params;
 
   return {
-    feedItem: getFeedItem(state, parseInt(feedItemId), parseInt(feedId))
+    feedItem: getFeedItem(state, feedItemId, feedId)
   };
 };
 

@@ -21,17 +21,16 @@ interface FeedItemWithAuthor extends FeedItem {
 
 const Home = ({ feeds, searchTerm, loadFeed }: Props) => {
   let allFeedItems: FeedItemWithAuthor[] = feeds.reduce(
-    (all: FeedItemWithAuthor[], feed, feedId) => {
+    (all: FeedItemWithAuthor[], feed) => {
       if (!feed.data || !feed.data.items) {
         return all;
       }
 
-      const newItems = feed.data.items.map((item, id) => {
+      const newItems = feed.data.items.map(item => {
         return {
           ...item,
           author: feed.data?.title || "",
-          id: id.toString(),
-          feedId: feedId.toString()
+          feedId: feed.id
         };
       });
       return [...all, ...newItems];

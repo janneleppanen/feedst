@@ -5,6 +5,7 @@ describe("FeedReducer", () => {
     const url = "https://feed.url";
     const expectedState: FeedState[] = [
       {
+        id: "1234",
         data: undefined,
         status: "loading",
         url
@@ -12,13 +13,18 @@ describe("FeedReducer", () => {
     ];
     const state = reducer([], createFeed(url));
 
-    expect(state).toEqual(expectedState);
+    expect(state.length).toEqual(1);
+    expect(state[0]?.data).toEqual(expectedState[0].data);
+    expect(state[0]?.status).toEqual(expectedState[0].status);
+    expect(state[0]?.url).toEqual(expectedState[0].url);
+    expect(typeof state[0]?.id).toEqual("string");
   });
 
   test("should update a feed data and change status", () => {
+    const id = "1234";
     const url = "https://feed.url";
     const initialState: FeedState[] = [
-      { url, status: "loading", data: undefined }
+      { id, url, status: "loading", data: undefined }
     ];
     const data = {
       title: "Title",
@@ -27,7 +33,7 @@ describe("FeedReducer", () => {
       link: "...",
       items: []
     };
-    const expectedState: FeedState[] = [{ url, status: "ready", data }];
+    const expectedState: FeedState[] = [{ id, url, status: "ready", data }];
     const state = reducer(initialState, updateFeed("https://feed.url", data));
 
     expect(state).toEqual(expectedState);
@@ -36,7 +42,7 @@ describe("FeedReducer", () => {
   test("should remove a feed", () => {
     const url = "https://feed.url";
     const initialState: FeedState[] = [
-      { url, status: "loading", data: undefined }
+      { id: "1234", url, status: "loading", data: undefined }
     ];
     const state = reducer(initialState, removeFeed(url));
 

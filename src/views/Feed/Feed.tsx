@@ -21,8 +21,8 @@ interface Props {
 
 const Feed = (props: Props) => {
   const { feeds, removeFeed, loadFeed, searchTerm } = props;
-  const feedId = parseInt(props.match.params.feedId);
-  const feed = feeds[feedId] ? feeds[feedId] : undefined;
+  const feedId = props.match.params.feedId;
+  const feed = feeds.find(feed => feed.id === feedId);
   const history = useHistory();
 
   if (!feed) {
@@ -72,14 +72,14 @@ const Feed = (props: Props) => {
       </header>
 
       <div className={classnames({ "opacity-25": feed.status === "loading" })}>
-        {filteredFeedItems.map((item, index) => (
+        {filteredFeedItems.map(item => (
           <FeedItemLink
             key={`${item.link}`}
             title={item.title}
             link={item.link}
             date={item.isoDate}
             feedId={feedId.toString()}
-            feedItemId={index.toString()}
+            feedItemId={item.id}
           />
         ))}
       </div>
