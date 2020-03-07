@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { store } from "../redux/store";
 import { render, RenderOptions } from "@testing-library/react";
 
-const feeds: FeedStateList = [
+const feeds: FeedList = [
   {
     id: "abc-123",
     url: "http://podcast.tech/rss",

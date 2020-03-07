@@ -1,20 +1,20 @@
 interface GlobalState {
   searchTerm: string;
-  feeds: FeedStateList;
+  feeds: FeedList;
 }
 
-type FeedStateList = FeedState[];
+type FeedList = Feed[];
 
-interface FeedState {
+interface Feed {
   id: string;
   url: string;
-  data?: Feed;
+  data?: FeedData;
   status: FeedStatus;
 }
 
 type FeedStatus = "loading" | "ready";
 
-interface Feed {
+interface FeedData {
   title: string;
   description: string;
   image?: {
