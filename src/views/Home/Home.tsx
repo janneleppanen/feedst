@@ -8,7 +8,7 @@ import EmtpyState from "../../components/EmptyState";
 import { loadFeed } from "../../redux/FeedRedux";
 
 interface Props {
-  feeds: FeedStateList;
+  feeds: FeedList;
   searchTerm: string;
   loadFeed: (url: string) => void;
 }

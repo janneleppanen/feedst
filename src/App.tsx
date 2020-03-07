@@ -11,7 +11,7 @@ import FeedItemArticle from "./components/FeedItemArticle";
 import SlideContent from "./components/SlideContent";
 
 interface Props {
-  feeds: FeedState[];
+  feeds: FeedList;
   loadFeed: (url: string) => void;
 }
 

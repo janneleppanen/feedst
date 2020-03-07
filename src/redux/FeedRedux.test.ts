@@ -3,7 +3,7 @@ import { reducer, createFeed, updateFeed, removeFeed } from "./FeedRedux";
 describe("FeedReducer", () => {
   test("should create a new feed", () => {
     const url = "https://feed.url";
-    const expectedState: FeedState[] = [
+    const expectedState: FeedList = [
       {
         id: "1234",
         data: undefined,
@@ -23,7 +23,7 @@ describe("FeedReducer", () => {
   test("should update a feed data and change status", () => {
     const id = "1234";
     const url = "https://feed.url";
-    const initialState: FeedState[] = [
+    const initialState: FeedList = [
       { id, url, status: "loading", data: undefined }
     ];
     const data = {
@@ -33,7 +33,7 @@ describe("FeedReducer", () => {
       link: "...",
       items: []
     };
-    const expectedState: FeedState[] = [{ id, url, status: "ready", data }];
+    const expectedState: FeedList = [{ id, url, status: "ready", data }];
     const state = reducer(initialState, updateFeed("https://feed.url", data));
 
     expect(state).toEqual(expectedState);
@@ -41,7 +41,7 @@ describe("FeedReducer", () => {
 
   test("should remove a feed", () => {
     const url = "https://feed.url";
-    const initialState: FeedState[] = [
+    const initialState: FeedList = [
       { id: "1234", url, status: "loading", data: undefined }
     ];
     const state = reducer(initialState, removeFeed(url));

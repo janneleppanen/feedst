@@ -6,7 +6,7 @@ import { NewFeedModal } from "../NewFeedForm";
 import SidebarWrapper from "./SidebarWrapper";
 
 interface Props {
-  feeds: FeedStateList;
+  feeds: FeedList;
   onSyncClick: () => void;
 }
 

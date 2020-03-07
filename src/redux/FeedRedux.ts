@@ -18,7 +18,7 @@ type CreateAction = {
 type UpdateAction = {
   type: typeof UPDATE_FEED;
   url: string;
-  data: Feed;
+  data: FeedData;
 };
 
 type RemoveAction = {
@@ -35,11 +35,11 @@ const feed = (state: undefined, action: Action) => {
         url: action.url,
         data: undefined,
         status: "loading"
-      } as FeedState;
+      } as Feed;
   }
 };
 
-const reducer = (state: FeedStateList = [], action: Action) => {
+const reducer = (state: FeedList = [], action: Action) => {
   switch (action.type) {
     case CREATE_FEED:
       const alreadyExists = state.find(f => f.url === action.url);
@@ -83,7 +83,7 @@ const createFeed = (url: string) => ({
   url
 });
 
-const updateFeed = (url: string, data: Feed) => ({
+const updateFeed = (url: string, data: FeedData) => ({
   type: UPDATE_FEED as typeof UPDATE_FEED,
   url,
   data
@@ -113,7 +113,7 @@ const loadFeed = (url: string) => {
 };
 
 const getFeedItem = (
-  state: FeedStateList = [],
+  state: FeedList = [],
   feedItemId: string,
   feedId: string
 ) => {
