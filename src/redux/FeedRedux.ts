@@ -100,8 +100,7 @@ const getFeedItem = (
   feedId: number
 ) => {
   const feed = state[feedId];
-  let feedItem = feed?.data?.items[feedItemId];
-  return feedItem || null;
+  return feed?.data?.items[feedItemId];
 };
 
 export { reducer, createFeed, updateFeed, removeFeed, loadFeed, getFeedItem };

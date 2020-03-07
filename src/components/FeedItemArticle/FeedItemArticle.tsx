@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import { getFeedItem } from "../../redux/selectors";
 
 interface Props {
-  feedItem: FeedItem | null;
+  feedItem?: FeedItem;
   match: {
     params: {
       feedId: string;

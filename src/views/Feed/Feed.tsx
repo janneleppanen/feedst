@@ -22,7 +22,7 @@ interface Props {
 const Feed = (props: Props) => {
   const { feeds, removeFeed, loadFeed, searchTerm } = props;
   const feedId = parseInt(props.match.params.feedId);
-  const feed = feeds[feedId] ? feeds[feedId] : null;
+  const feed = feeds[feedId] ? feeds[feedId] : undefined;
   const history = useHistory();
 
   if (!feed) {
