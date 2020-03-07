@@ -33,8 +33,8 @@ const feed = (state: undefined, action: Action) => {
       return {
         id,
         url: action.url,
-        data: undefined,
-        status: "loading"
+        status: "loading",
+        items: []
       } as Feed;
   }
 };
@@ -54,13 +54,13 @@ const reducer = (state: FeedList = [], action: Action) => {
       return [...state, feed(undefined, action)];
     case UPDATE_FEED:
       return state.map(feed => {
-        if (feed.url === action.url) {
-          feed.data = action.data;
-          feed.status = "ready";
-        }
+        let updatedFeed = { ...feed };
 
-        if (feed.data && feed.data.items) {
-          feed.data.items = feed.data.items.map(feedItem => {
+        if (feed.url === action.url) {
+          updatedFeed = { ...feed, ...action.data };
+          updatedFeed.status = "ready";
+
+          updatedFeed.items = updatedFeed.items.map(feedItem => {
             const id = uuidv4();
             return {
               ...feedItem,
@@ -69,7 +69,7 @@ const reducer = (state: FeedList = [], action: Action) => {
           });
         }
 
-        return feed;
+        return updatedFeed;
       });
     case REMOVE_FEED:
       return state.filter(feed => feed.url !== action.url);
@@ -116,7 +116,7 @@ const getFeedItem = (
   feedId: string
 ) => {
   const feed = state.find(feed => feed.id === feedId);
-  return feed?.data?.items.find(feedItem => feedItem.id === feedItemId);
+  return feed?.items.find(feedItem => feedItem.id === feedItemId);
 };
 
 export { reducer, createFeed, updateFeed, removeFeed, loadFeed, getFeedItem };

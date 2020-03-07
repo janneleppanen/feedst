@@ -22,14 +22,14 @@ interface FeedItemWithAuthor extends FeedItem {
 const Home = ({ feeds, searchTerm, loadFeed }: Props) => {
   let allFeedItems: FeedItemWithAuthor[] = feeds.reduce(
     (all: FeedItemWithAuthor[], feed) => {
-      if (!feed.data || !feed.data.items) {
+      if (!feed || !feed.items) {
         return all;
       }
 
-      const newItems = feed.data.items.map(item => {
+      const newItems = feed.items.map(item => {
         return {
           ...item,
-          author: feed.data?.title || "",
+          author: feed?.title || "",
           feedId: feed.id
         };
       });
