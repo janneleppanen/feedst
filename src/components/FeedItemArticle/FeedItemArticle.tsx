@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { format } from "date-fns";
+import { getFeedItem } from "../../redux/selectors";
 
 interface Props {
   feedItem: FeedItem | null;
@@ -44,11 +45,9 @@ const Article: React.FC<Props> = ({ feedItem }) => {
 
 const mapStateToProps = (state: GlobalState, props: Props) => {
   const { feedId, feedItemId } = props.match.params;
-  const feed = state.feeds[parseInt(feedId)];
-  let feedItem = feed?.data?.items[parseInt(feedItemId)];
 
   return {
-    feedItem: feedItem || null
+    feedItem: getFeedItem(state, parseInt(feedItemId), parseInt(feedId))
   };
 };
 
