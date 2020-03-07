@@ -12,19 +12,14 @@ exports.handler = async (event, context) => {
     };
   }
 
-  const parsedFeeds = {};
-  const reqBody = JSON.parse(event.body);
-  const feeds = reqBody.rssFeeds;
-
-  for (feed of feeds) {
-    parsedFeeds[feed] = await parser.parseURL(feed);
-  }
+  const { rssUrl } = JSON.parse(event.body);
+  const rssData = await parser.parseURL(rssUrl);
 
   return {
     statusCode: 200,
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(parsedFeeds)
+    body: JSON.stringify(rssData)
   };
 };

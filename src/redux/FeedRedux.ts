@@ -94,20 +94,18 @@ const removeFeed = (url: string) => ({
   url
 });
 
-const loadFeed = (url: string) => {
+const loadFeed = (rssUrl: string) => {
   return async (dispatch: Dispatch) => {
-    dispatch(createFeed(url));
+    dispatch(createFeed(rssUrl));
     try {
       const res = await fetch(FEED_PARSE_URL || "", {
         method: "POST",
-        body: JSON.stringify({ rssFeeds: [url] })
+        body: JSON.stringify({ rssUrl })
       });
-      const data = await res.json();
-      const feedData = data[url];
-
-      dispatch(updateFeed(url, feedData));
+      const feedData = await res.json();
+      dispatch(updateFeed(rssUrl, feedData));
     } catch (e) {
-      dispatch(removeFeed(url));
+      dispatch(removeFeed(rssUrl));
     }
   };
 };
