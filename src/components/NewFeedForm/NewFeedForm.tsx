@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { loadFeed } from "../../redux/FeedReducer";
+import { loadFeed } from "../../redux/FeedRedux";
 
 interface Props {
   loadFeed: (url: string) => void;

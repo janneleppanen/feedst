@@ -5,7 +5,7 @@ import FeedItemLink from "../../components/FeedItemLink";
 import demoFeeds from "../../utils/demo-feeds";
 import Search from "../../components/Search";
 import EmtpyState from "../../components/EmptyState";
-import { loadFeed } from "../../redux/FeedReducer";
+import { loadFeed } from "../../redux/FeedRedux";
 
 interface Props {
   feeds: FeedList;

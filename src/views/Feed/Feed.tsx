@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import classnames from "classnames";
 
 import Search from "../../components/Search";
-import { removeFeed, loadFeed } from "../../redux/FeedReducer";
+import { removeFeed, loadFeed } from "../../redux/FeedRedux";
 import FeedItemLink from "../../components/FeedItemLink";
 
 interface Props {

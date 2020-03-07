@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { setSearchTerm, removeSearchTerm } from "../../redux/SearchReducer";
+import { setSearchTerm, removeSearchTerm } from "../../redux/SearchRedux";
 
 interface Props {
   setSearchTerm: typeof setSearchTerm;

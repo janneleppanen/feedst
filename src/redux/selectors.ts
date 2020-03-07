@@ -1,4 +1,4 @@
-import * as FromFeedRedux from "./FeedReducer";
+import * as FromFeedRedux from "./FeedRedux";
 
 export const getFeedItem = (
   state: GlobalState,
