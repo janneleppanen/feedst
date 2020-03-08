@@ -16,7 +16,7 @@
   }
 }
 
-.slide-leave {
+.slide-exit {
   opacity: 1;
 
   > div {
@@ -24,12 +24,12 @@
   }
 }
 
-.slide-leave.slide-leave-active {
+.slide-exit.slide-exit-active {
   opacity: 0;
-  transition: all 0.15s ease-in;
+  transition: all 0.25s ease-in;
 
   > div {
-    transition: all 0.15s ease-in;
+    transition: all 0.25s ease-in;
     transform: translateX(30%);
   }
 }

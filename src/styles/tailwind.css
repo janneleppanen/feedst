@@ -685,21 +685,21 @@ video {
     transform: translateX(0);
   }
 
-.slide-leave {
+.slide-exit {
   opacity: 1;
 }
 
-.slide-leave > div {
+.slide-exit > div {
     transform: translateX(0);
   }
 
-.slide-leave.slide-leave-active {
+.slide-exit.slide-exit-active {
   opacity: 0;
-  transition: all 0.15s ease-in;
+  transition: all 0.25s ease-in;
 }
 
-.slide-leave.slide-leave-active > div {
-    transition: all 0.15s ease-in;
+.slide-exit.slide-exit-active > div {
+    transition: all 0.25s ease-in;
     transform: translateX(30%);
   }
 
