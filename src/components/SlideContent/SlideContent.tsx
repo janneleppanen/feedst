@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import { CSSTransition } from "react-transition-group";
 
 import usePortal from "../../utils/usePortal";
 
@@ -14,12 +14,8 @@ const SlideContent: React.FC<Props> = ({ children, onClose, isOpen }) => {
   const overlayElement = React.useRef(null);
 
   return ReactDOM.createPortal(
-    <ReactCSSTransitionGroup
-      transitionName="slide"
-      transitionEnterTimeout={250}
-      transitionLeaveTimeout={150}
-    >
-      {isOpen && (
+    <CSSTransition in={isOpen} classNames="slide" timeout={250} unmountOnExit>
+      <>
         <div
           ref={overlayElement}
           className="fixed dark-overlay top-0 bottom-0 left-0 right-0 flex items-center justify-center"
@@ -39,8 +35,8 @@ const SlideContent: React.FC<Props> = ({ children, onClose, isOpen }) => {
             {children}
           </div>
         </div>
-      )}
-    </ReactCSSTransitionGroup>,
+      </>
+    </CSSTransition>,
     target
   );
 };
