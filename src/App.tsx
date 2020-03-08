@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import classNames from "classnames";
 
 import { loadFeed } from "./redux/FeedRedux";
 import Sidebar from "./components/Sidebar";
@@ -16,6 +17,7 @@ interface Props {
 }
 
 const App = ({ feeds, loadFeed }: Props) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const location = useLocation();
   const history = useHistory();
 
@@ -27,7 +29,28 @@ const App = ({ feeds, loadFeed }: Props) => {
   };
 
   return (
-    <div className="flex h-screen text-sm font-sans">
+    <div
+      className={classNames(
+        "flex",
+        "h-screen",
+        "text-sm",
+        "font-sans",
+        "font-sans",
+        {
+          "sidebar-open": isMobileMenuOpen
+        }
+      )}
+    >
+      <button
+        className="mobile-menu-toggler"
+        onClick={() => {
+          console.log("click", isMobileMenuOpen);
+          setIsMobileMenuOpen(!isMobileMenuOpen);
+        }}
+      >
+        Menu
+      </button>
+
       <SlideContent
         onClose={() => history.push(background?.pathname || "/")}
         isOpen={!!background}
@@ -39,8 +62,9 @@ const App = ({ feeds, loadFeed }: Props) => {
       </SlideContent>
 
       <Sidebar feeds={feeds} onSyncClick={syncAllFeeds} />
-      <div className="flex flex-1 flex-col overflow-auto h-full">
-        <main className="max-w-screen-md w-full mx-auto my-10 p-10 flex-1">
+
+      <div className="flex flex-1 flex-col overflow-auto h-full main-content">
+        <main className="max-w-screen-md w-full mx-auto px-2 py-16 flex-1">
           <Switch location={background || location}>
             <Route exact path="/" component={Home}></Route>
             <Route path="/feed/:feedId" component={Feed}></Route>

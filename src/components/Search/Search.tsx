@@ -15,7 +15,7 @@ const Search: React.FC<Props> = ({
   removeSearchTerm
 }) => {
   return (
-    <div className="relative">
+    <div className="relative mx-4">
       <input
         className="border border-gray-300 border-solid rounded-md py-2 px-4 pr-10 mr-2 flex-1 w-full"
         type="text"

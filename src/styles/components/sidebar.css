@@ -1,0 +1,32 @@
+.sidebar {
+  transition: all 0.4s;
+  @apply w-64 fixed h-full z-10 overflow-x-auto;
+}
+
+.main-content {
+  @apply ml-64;
+}
+
+.mobile-menu-toggler {
+  display: none;
+  @apply absolute top-0 right-0 mt-4 mr-8 p-2 font-bold;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    transform: translate(-100%);
+  }
+  .sidebar-open {
+    .sidebar {
+      transform: translate(0);
+    }
+  }
+
+  .main-content {
+    @apply ml-0;
+  }
+
+  .mobile-menu-toggler {
+    display: block;
+  }
+}

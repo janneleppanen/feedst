@@ -18,7 +18,7 @@ const SlideContent: React.FC<Props> = ({ children, onClose, isOpen }) => {
       <>
         <div
           ref={overlayElement}
-          className="fixed dark-overlay top-0 bottom-0 left-0 right-0 flex items-center justify-center"
+          className="fixed dark-overlay top-0 bottom-0 left-0 right-0 flex items-center justify-center z-20"
           onMouseDown={e => {
             if (e.target === overlayElement.current) {
               onClose();
