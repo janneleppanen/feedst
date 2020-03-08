@@ -5,9 +5,10 @@ import { loadFeed } from "../../redux/FeedRedux";
 
 interface Props {
   loadFeed: (url: string) => void;
+  onSubmit?: () => void;
 }
 
-const NewFeedForm: React.FC<Props> = ({ loadFeed }) => {
+const NewFeedForm: React.FC<Props> = ({ loadFeed, onSubmit }) => {
   const [newFeedURL, setNewFeedURL] = React.useState<string>("");
 
   const handleFormSubmit = () => {
@@ -20,6 +21,7 @@ const NewFeedForm: React.FC<Props> = ({ loadFeed }) => {
       onSubmit={e => {
         e.preventDefault();
         handleFormSubmit();
+        onSubmit && onSubmit();
       }}
       className="flex"
     >
