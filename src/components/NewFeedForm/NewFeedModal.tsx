@@ -14,7 +14,7 @@ const NewFeedModal: React.FC<Props> = ({ isOpen, onClose }) => {
       <h2 className="mb-4 font-bold text-lg text-gray-700">
         URL of the RSS feed
       </h2>
-      <NewFeedForm />
+      <NewFeedForm onSubmit={onClose} />
     </Modal>
   );
 };
