@@ -46,9 +46,9 @@ const Feed = (props: Props) => {
     <>
       <Search />
 
-      <hr className="my-8" />
+      <hr className="my-8 mx-4" />
 
-      <header className="mb-16">
+      <header className="mb-16 mx-4">
         <h1 className="text-4xl font-bold leading-tight mb-6">{feed.title}</h1>
         <p className="text-xl text-gray-700 mb-6">{feed.description}</p>
         <div className="flex">

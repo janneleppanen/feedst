@@ -58,7 +58,7 @@ const Home = ({ feeds, searchTerm, loadFeed }: Props) => {
     <>
       <Search />
 
-      <hr className="my-8" />
+      <hr className="my-8 mx-4" />
 
       {sortedFeedItems.map(item => {
         return (

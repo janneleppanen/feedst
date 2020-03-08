@@ -17,7 +17,7 @@ const FeedItemLink = ({ title, date, author, feedId, feedItemId }: Props) => {
   const formattedDate = format(new Date(date), "LLLL, d y");
   return (
     <Link
-      className="border-solid block text-lg -mx-4 p-4 hover:bg-green-200 block w-full text-left"
+      className="border-solid block text-lg p-4 hover:bg-green-200 block w-full text-left"
       data-testid="feed-item-link"
       to={{
         pathname: `/feed/${feedId}/item/${feedItemId}/`,

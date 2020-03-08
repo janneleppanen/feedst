@@ -34,7 +34,7 @@ const Sidebar = ({ feeds, onSyncClick }: Props) => {
             className={classnames(
               "truncate block hover:text-green-400 hover:bg-gray-900 flex items-center border-r-8 border-solid border-transparent -mx-6 px-6 py-2",
               {
-                "border-green-400": match?.params.id || "" === feed.id
+                "border-green-400": match?.params.id === feed.id
               }
             )}
             data-testid="sidebar-feed-item"
