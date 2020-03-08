@@ -1,50 +1,39 @@
 .single-content {
-  line-height: 1.6;
-  font-size: 1.125rem;
+  @apply text-xl leading-relaxed;
 
   h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    @apply text-3xl my-8;
   }
 
   h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    @apply text-2xl my-6;
   }
 
   p {
-    margin-bottom: 1rem;
+    @apply my-6;
   }
 
   a {
-    color: #38a169;
-    text-decoration: underline;
+    @apply text-green-600 underline;
   }
 
   code {
-    background: #eee;
-    display: inline-block;
-    padding: 0 0.2rem;
-    border-radius: 4px;
+    @apply inline-block text-base px-2 bg-gray-200 rounded-md border border-gray-300;
   }
 
   pre code {
-    font-size: 1rem;
-    padding: 1rem;
-    max-width: 100%;
-    overflow-x: auto;
+    @apply p-4 w-full overflow-x-auto;
   }
 
   ul {
-    list-style: circle;
-    padding-left: 3em;
+    @apply pl-12 list-disc my-6;
 
     li {
-      margin-bottom: 1em;
+      @apply mb-4;
     }
   }
 
   img {
-    margin: 0 auto;
+    @apply mx-auto;
   }
 }

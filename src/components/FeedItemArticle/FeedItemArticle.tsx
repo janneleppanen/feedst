@@ -20,12 +20,12 @@ const Article: React.FC<Props> = ({ feedItem }) => {
   const content: string = feedItem["content:encoded"] || feedItem.content || "";
 
   return (
-    <div>
-      <h1 className="text-4xl font-bold leading-tight mb-6">
+    <div className="max-w-2xl mx-auto">
+      <h1 className="text-4xl font-bold leading-tight mb-4">
         {feedItem.title}
       </h1>
 
-      <p className="mb-6">
+      <p className="mb-16">
         {formattedDate}
         <span className="inline-block px-2 text-gray-700">&bull;</span>
         <a href={feedItem.link} className="text-green-600 text-md">

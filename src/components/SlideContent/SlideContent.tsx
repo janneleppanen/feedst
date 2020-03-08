@@ -25,7 +25,7 @@ const SlideContent: React.FC<Props> = ({ children, onClose, isOpen }) => {
             }
           }}
         >
-          <div className="fixed right-0 top-0 bottom-0 bg-white p-10 w-full max-w-6xl shadow-2xl overflow-auto">
+          <div className="fixed right-0 top-0 bottom-0 bg-white px-6 py-20 w-full max-w-6xl shadow-2xl overflow-auto">
             <button
               className="absolute top-0 right-0 py-4 px-6 text-2xl"
               onClick={() => onClose()}
