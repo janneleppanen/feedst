@@ -15,27 +15,28 @@ const SlideContent: React.FC<Props> = ({ children, onClose, isOpen }) => {
 
   return ReactDOM.createPortal(
     <CSSTransition in={isOpen} classNames="slide" timeout={250} unmountOnExit>
-      <>
+      <div>
         <div
+          tabIndex={0}
+          role="button"
           ref={overlayElement}
-          className="fixed dark-overlay top-0 bottom-0 left-0 right-0 flex items-center justify-center z-20"
+          className="slide-content-overlay dark-overlay"
           onMouseDown={e => {
             if (e.target === overlayElement.current) {
               onClose();
             }
           }}
-        >
-          <div className="fixed right-0 top-0 bottom-0 bg-white px-6 py-20 w-full max-w-6xl shadow-2xl overflow-auto">
-            <button
-              className="absolute top-0 right-0 py-4 px-6 text-2xl"
-              onClick={() => onClose()}
-            >
-              &times;
-            </button>
-            {children}
-          </div>
+        />
+        <div className="slide-content" role="dialog" tabIndex={-1}>
+          <button
+            className="absolute top-0 right-0 py-4 px-6 text-2xl"
+            onClick={() => onClose()}
+          >
+            &times;
+          </button>
+          {children}
         </div>
-      </>
+      </div>
     </CSSTransition>,
     target
   );
