@@ -52,9 +52,6 @@
     "test:coverage": "react-scripts test  --watchAll=false --coverage --coverageDirectory=coverage/ --collectCoverageFrom=src/**/*.{ts,tsx} --collectCoverageFrom=!src/**/{*.stories.js,*.d.ts,serviceWorker.ts}",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
