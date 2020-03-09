@@ -1,7 +1,11 @@
+#slide-content-root {
+  @apply relative z-30;
+}
+
 .slide-enter {
   opacity: 0;
-
-  > div {
+  z-index: 100;
+  .slide-content {
     transform: translateX(30%);
   }
 }
@@ -10,7 +14,7 @@
   opacity: 1;
   transition: all 0.25s ease-out;
 
-  > div {
+  .slide-content {
     transition: all 0.25s ease-out;
     transform: translateX(0);
   }
@@ -19,7 +23,7 @@
 .slide-exit {
   opacity: 1;
 
-  > div {
+  .slide-content {
     transform: translateX(0);
   }
 }
@@ -28,8 +32,17 @@
   opacity: 0;
   transition: all 0.25s ease-in;
 
-  > div {
+  .slide-content {
     transition: all 0.25s ease-in;
     transform: translateX(30%);
   }
+}
+
+.slide-content-overlay {
+  @apply fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center z-20 w-full;
+}
+
+.slide-content {
+  transition: all 0.25s;
+  @apply fixed right-0 top-0 bottom-0 bg-white px-6 py-20 w-full max-w-6xl shadow-2xl overflow-auto z-30;
 }

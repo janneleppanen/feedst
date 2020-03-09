@@ -15,25 +15,31 @@ const Modal: React.FC<Props> = ({ children, isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return ReactDOM.createPortal(
-    <div
-      ref={overlayElement}
-      className="fixed dark-overlay top-0 bottom-0 left-0 right-0 flex items-center justify-center z-20"
-      onMouseDown={e => {
-        if (e.target === overlayElement.current) {
-          onClose();
-        }
-      }}
-    >
-      <div className="w-full max-w-screen-md bg-white px-10 py-16 rounded-md relative shadow-lg mx-6">
-        <button
-          className="absolute top-0 right-0 py-2 px-4 text-2xl"
-          onClick={onClose}
-        >
-          &times;
-        </button>
-        {children}
+    <>
+      <div
+        tabIndex={0}
+        role="button"
+        ref={overlayElement}
+        className="modal-overlay dark-overlay"
+        onMouseDown={e => {
+          if (e.target === overlayElement.current) {
+            onClose();
+          }
+        }}
+      />
+
+      <div className="modal-container">
+        <div className="modal">
+          <button
+            className="absolute top-0 right-0 py-2 px-4 text-2xl"
+            onClick={onClose}
+          >
+            &times;
+          </button>
+          {children}
+        </div>
       </div>
-    </div>,
+    </>,
     target
   );
 };
