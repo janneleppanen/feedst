@@ -14,7 +14,7 @@ const EmtpyState: React.FC<Props> = ({ onDemoButtonClick }) => {
         <Illustration className="w-full h-auto mx-auto" />
       </div>
 
-      <blockquote className="max-w-md mx-auto mb-20 text-gray-500 text-2xl font-bold text-center">
+      <blockquote className="max-w-md mx-auto mb-20 text-gray-600 text-2xl font-bold text-center">
         “Think before you speak.
         <br /> Read before you think.”
         <span className="block text-lg pt-2 font-normal">– Fran Lebowitz</span>
@@ -25,10 +25,10 @@ const EmtpyState: React.FC<Props> = ({ onDemoButtonClick }) => {
       </h2>
       <NewFeedForm />
 
-      <p className="text-center mt-12 mb-2">or</p>
+      <p className="text-center mt-12 mb-12">or</p>
 
       <button
-        className="text-green-600 text-center w-full"
+        className="text-green-600 text-center w-full font-bold text-base"
         onClick={onDemoButtonClick}
       >
         Add a bunch of feeds to test out application
