@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { loadFeed } from "../../redux/FeedRedux";
+import Button from "../common/Button";
 
 interface Props {
   loadFeed: (url: string) => void;
@@ -37,9 +38,7 @@ const NewFeedForm: React.FC<Props> = ({ loadFeed, onSubmit }) => {
         onChange={e => setNewFeedURL(e.currentTarget.value)}
         data-testid="new-feed-input"
       />
-      <button className="btn" data-testid="new-feed-submit">
-        Add Feed
-      </button>
+      <Button data-testid="new-feed-submit">Add Feed</Button>
     </form>
   );
 };

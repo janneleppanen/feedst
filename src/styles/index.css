@@ -3,7 +3,6 @@
 @import "tailwindcss/components";
 
 @import "core/general";
-@import "components/button";
 @import "components/single-feed-item";
 @import "components/slide-content";
 @import "components/sidebar";
