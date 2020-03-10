@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { loadFeed } from "../../redux/FeedRedux";
 import Button from "../common/Button";
+import TextInput from "../common/TextInput";
 
 interface Props {
   loadFeed: (url: string) => void;
@@ -26,13 +27,9 @@ const NewFeedForm: React.FC<Props> = ({ loadFeed, onSubmit }) => {
       }}
       className="flex"
     >
-      <label htmlFor="new-feed" className="sr-only">
-        Name of the new feed
-      </label>
-      <input
+      <TextInput
+        label="URL of the RSS feed"
         id="new-feed"
-        className="border border-gray-300 border-solid rounded-md py-2 px-4 mr-2 flex-1"
-        type="text"
         value={newFeedURL}
         placeholder="https://the-best-articles.io/feed"
         onChange={e => setNewFeedURL(e.currentTarget.value)}
