@@ -25,7 +25,11 @@ const NewFeedForm: React.FC<Props> = ({ loadFeed, onSubmit }) => {
       }}
       className="flex"
     >
+      <label htmlFor="new-feed" className="sr-only">
+        Name of the new feed
+      </label>
       <input
+        id="new-feed"
         className="border border-gray-300 border-solid rounded-md py-2 px-4 mr-2 flex-1"
         type="text"
         value={newFeedURL}
