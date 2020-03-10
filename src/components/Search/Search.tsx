@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { setSearchTerm, removeSearchTerm } from "../../redux/SearchRedux";
+import TextInput from "../common/TextInput";
 
 interface Props {
   setSearchTerm: typeof setSearchTerm;
@@ -16,11 +17,10 @@ const Search: React.FC<Props> = ({
 }) => {
   return (
     <div className="relative mx-4">
-      <input
-        className="border border-gray-300 border-solid rounded-md py-2 px-4 pr-10 mr-2 flex-1 w-full"
-        type="text"
+      <TextInput
+        label="Search for..."
         data-testid="search-input"
-        placeholder="Search..."
+        placeholder="Search for..."
         value={searchTerm}
         onChange={e => setSearchTerm(e.target.value)}
       />
