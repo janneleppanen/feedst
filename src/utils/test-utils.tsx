@@ -22,7 +22,7 @@ const feeds: FeedList = [
         content: "Content...",
         link: "http://podcast.tech/1",
         pubDate: "Mon, 3 Feb 2020 15:42:36 +0000",
-        isoDate: "2020-02-03T15:42:36.000Z"
+        isoDate: "2020-02-03T15:42:36.000Z",
       },
       {
         id: "abc-123-2",
@@ -31,9 +31,9 @@ const feeds: FeedList = [
         content: "Content...",
         link: "http://podcast.tech/2",
         pubDate: "Mon, 2 Feb 2020 15:42:36 +0000",
-        isoDate: "2020-02-03T15:42:36.000Z"
-      }
-    ]
+        isoDate: "2020-02-03T15:42:36.000Z",
+      },
+    ],
   },
   {
     id: "jkl-123",
@@ -42,7 +42,7 @@ const feeds: FeedList = [
     title: "Podcast",
     description: "Podcast description...",
     image: {
-      url: "http://another-podcast.tech/assests/image"
+      url: "http://another-podcast.tech/assests/image",
     },
     link: "http://another-podcast.tech",
     items: [
@@ -53,16 +53,16 @@ const feeds: FeedList = [
         content: "Content...",
         link: "http://another-podcast.tech/1",
         pubDate: "Mon, 17 Feb 2020 15:42:36 +0000",
-        isoDate: "2020-02-17T15:42:36.000Z"
-      }
-    ]
+        isoDate: "2020-02-17T15:42:36.000Z",
+      },
+    ],
   },
   {
     id: "str-123",
     url: "http://magazine.tech/rss",
     status: "loading",
-    items: []
-  }
+    items: [],
+  },
 ];
 
 const AllProviders: React.FC = ({ children }) => {

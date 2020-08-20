@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, fireEvent, wait } from "../../utils/test-utils";
+import { render, fireEvent, act } from "../../utils/test-utils";
 import Home from ".";
 
 describe("<Home />", () => {
@@ -9,14 +9,15 @@ describe("<Home />", () => {
     expect(getAllByTestId("feed-item-link").length).toBe(3);
   });
 
-  test("should filter list of feed item by search term", () => {
-    const { getAllByTestId, getByTestId } = render(<Home />);
-    const searchInput = getByTestId("search-input");
+  test("should filter list of feed item by search term", async () => {
+    const { getByTestId, findAllByTestId } = render(<Home />);
 
-    fireEvent.change(searchInput, { e: { target: { value: "Hello World" } } });
-
-    wait(() => {
-      expect(getAllByTestId("feed-item-link").length).toBe(1);
+    await act(async () => {
+      const searchInput = getByTestId("search-input");
+      fireEvent.change(searchInput, { target: { value: "Hello World" } });
     });
+
+    const items = await findAllByTestId("feed-item-link");
+    expect(items.length).toBe(1);
   });
 });

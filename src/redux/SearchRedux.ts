@@ -19,12 +19,12 @@ const reducer = (state = "", action: Action) => {
 
 const setSearchTerm = (term: string) => ({
   type: SET_SEARCH_TERM as typeof SET_SEARCH_TERM,
-  term
+  term,
 });
 
 const removeSearchTerm = () => ({
   type: REMOVE_SEARCH_TERM as typeof REMOVE_SEARCH_TERM,
-  term: ""
+  term: "",
 });
 
 export { reducer, setSearchTerm, removeSearchTerm };
