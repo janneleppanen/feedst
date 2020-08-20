@@ -13,7 +13,7 @@ interface Props {
 const Search: React.FC<Props> = ({
   searchTerm,
   setSearchTerm,
-  removeSearchTerm
+  removeSearchTerm,
 }) => {
   return (
     <div className="relative mx-4">
@@ -22,7 +22,7 @@ const Search: React.FC<Props> = ({
         data-testid="search-input"
         placeholder="Search for..."
         value={searchTerm}
-        onChange={e => setSearchTerm(e.target.value)}
+        onChange={(e) => setSearchTerm(e.target.value)}
       />
       {searchTerm !== "" && (
         <button
@@ -38,7 +38,7 @@ const Search: React.FC<Props> = ({
 
 const mapStateToProps = ({ searchTerm }: GlobalState) => {
   return {
-    searchTerm
+    searchTerm,
   };
 };
 

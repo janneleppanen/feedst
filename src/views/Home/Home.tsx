@@ -26,11 +26,11 @@ const Home = ({ feeds, searchTerm, loadFeed }: Props) => {
         return all;
       }
 
-      const newItems = feed.items.map(item => {
+      const newItems = feed.items.map((item) => {
         return {
           ...item,
           author: feed?.title || "",
-          feedId: feed.id || ""
+          feedId: feed.id || "",
         };
       });
       return [...all, ...newItems];
@@ -38,7 +38,7 @@ const Home = ({ feeds, searchTerm, loadFeed }: Props) => {
     []
   );
 
-  allFeedItems = allFeedItems.filter(feedItem => {
+  allFeedItems = allFeedItems.filter((feedItem) => {
     return feedItem.title.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
@@ -48,7 +48,7 @@ const Home = ({ feeds, searchTerm, loadFeed }: Props) => {
     return aDate.getTime() > bDate.getTime() ? -1 : 1;
   });
 
-  const addDemoFeeds = () => demoFeeds.forEach(url => loadFeed(url));
+  const addDemoFeeds = () => demoFeeds.forEach((url) => loadFeed(url));
 
   if (feeds.length === 0) {
     return <EmtpyState onDemoButtonClick={addDemoFeeds} />;
@@ -60,7 +60,7 @@ const Home = ({ feeds, searchTerm, loadFeed }: Props) => {
 
       <hr className="my-8 mx-4" />
 
-      {sortedFeedItems.map(item => {
+      {sortedFeedItems.map((item) => {
         return (
           <FeedItemLink
             key={`${item.link}`}
@@ -80,7 +80,7 @@ const Home = ({ feeds, searchTerm, loadFeed }: Props) => {
 const mapStateToProps = ({ feeds, searchTerm }: GlobalState) => {
   return {
     feeds,
-    searchTerm
+    searchTerm,
   };
 };
 

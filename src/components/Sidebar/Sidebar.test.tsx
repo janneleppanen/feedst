@@ -2,13 +2,7 @@ import React from "react";
 import fetch from "node-fetch";
 import { store } from "../../redux/store";
 
-import {
-  render,
-  feeds,
-  fireEvent,
-  wait,
-  waitForElement
-} from "../../utils/test-utils";
+import { render, feeds, fireEvent, waitFor, act } from "../../utils/test-utils";
 import Sidebar from ".";
 
 jest.mock("node-fetch");
@@ -29,10 +23,10 @@ describe("<Sidebar/>", () => {
   });
 
   test("should add new feed", async () => {
-    const { getByTestId, container } = render(
+    const { findByTestId } = render(
       <Sidebar feeds={feeds} onSyncClick={() => {}} />
     );
-    const openNewFeedModalButton: HTMLElement = getByTestId(
+    const openNewFeedModalButton: HTMLElement = await findByTestId(
       "open-new-feed-modal"
     );
 
@@ -43,26 +37,25 @@ describe("<Sidebar/>", () => {
     fireEvent.click(openNewFeedModalButton);
 
     // wait for modal to open
-    const [input, submit] = await waitForElement(
-      () => [getByTestId("new-feed-input"), getByTestId("new-feed-submit")],
-      { container }
-    );
+    const input = await findByTestId("new-feed-input");
+    const submit = await findByTestId("new-feed-submit");
+
     fireEvent.change(input, {
-      target: { value: "https://add-a-new-feed.com/rss" }
+      target: { value: "https://add-a-new-feed.com/rss" },
     });
     fireEvent.click(submit);
 
     expect(fetch).toHaveBeenCalledTimes(1);
-    wait(() => {
+    waitFor(() => {
       expect(store.getState().feeds.length).toBe(4);
     });
   });
 
   test("should remove feed item if load fails", async () => {
-    const { getByTestId, container } = render(
+    const { findByTestId } = render(
       <Sidebar feeds={feeds} onSyncClick={() => {}} />
     );
-    const openNewFeedModalButton: HTMLElement = getByTestId(
+    const openNewFeedModalButton: HTMLElement = await findByTestId(
       "open-new-feed-modal"
     );
 
@@ -73,18 +66,18 @@ describe("<Sidebar/>", () => {
     fireEvent.click(openNewFeedModalButton);
 
     // wait for modal to open
-    const [input, submit] = await waitForElement(
-      () => [getByTestId("new-feed-input"), getByTestId("new-feed-submit")],
-      { container }
-    );
+    const input = await findByTestId("new-feed-input");
+    const submit = await findByTestId("new-feed-submit");
 
-    fireEvent.change(input, {
-      target: { value: "https://add-a-new-feed.com/rss" }
+    act(() => {
+      fireEvent.change(input, {
+        target: { value: "https://add-a-new-feed.com/rss" },
+      });
+      fireEvent.click(submit);
     });
-    fireEvent.click(submit);
 
-    wait(() => {
-      expect(store.getState().feeds.length).toBe(3);
+    waitFor(() => {
+      expect(store.getState().feeds).toBe(3);
     });
   });
 });
