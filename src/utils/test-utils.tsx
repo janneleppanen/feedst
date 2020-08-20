@@ -65,24 +65,27 @@ const feeds: FeedList = [
   },
 ];
 
-const AllProviders: React.FC = ({ children }) => {
-  // @ts-ignore
-  store.replaceReducer(() => ({ feeds, searchTerm: "" }));
-
-  return (
-    <>
-      <Provider store={store}>
-        <Router>{children}</Router>
-      </Provider>
-      <div id="modal-root"></div>
-    </>
-  );
-};
-
 const customRender = (
   ui: React.ReactElement,
+  initialState?: {},
   options?: Omit<RenderOptions, "queries">
-) => render(ui, { wrapper: AllProviders, ...options });
+) => {
+  // @ts-ignore
+  store.replaceReducer(() => ({ feeds, searchTerm: "", ...initialState }));
+
+  const AllProviders: React.FC = ({ children }) => {
+    return (
+      <>
+        <Provider store={store}>
+          <Router>{children}</Router>
+        </Provider>
+        <div id="modal-root"></div>
+      </>
+    );
+  };
+
+  return render(ui, { wrapper: AllProviders, ...options });
+};
 
 export * from "@testing-library/react";
 
