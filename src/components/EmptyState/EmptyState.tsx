@@ -31,7 +31,7 @@ const EmtpyState: React.FC<Props> = ({ onDemoButtonClick }) => {
         className="text-green-600 text-center w-full font-bold text-base"
         onClick={onDemoButtonClick}
       >
-        Add a bunch of feeds to test out application
+        Add a bunch of feeds to test out Feedst
       </button>
     </div>
   );
